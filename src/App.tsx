@@ -8,8 +8,8 @@ import * as SplashScreen from 'expo-splash-screen';
 import * as React from 'react';
 import { useColorScheme } from 'react-native';
 import { useFonts } from 'expo-font';
-import Router from '@navigation';
 import Fonts from '@constants/Fonts';
+import RootNavigator from '@navigation/RootNavigator';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -40,7 +40,7 @@ export function App() {
       theme={theme}
       linking={{ prefixes: [prefix] }}
       onReady={() => SplashScreen.hideAsync()}>
-      <Router />
+      <RootNavigator />
     </NavigationContainer>
   );
 }

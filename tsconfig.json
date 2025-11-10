@@ -2,6 +2,21 @@
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
     "moduleResolution": "bundler",
-    "strict": true
+    "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "@*": ["./src/*"],
+      "@api": ["src/api"],
+      "@assets": ["src/assets"],
+      "@components": ["src/components"],
+      "@constants": ["src/constants"],
+      "@hooks": ["src/hooks"],
+      "@navigation": ["src/navigation"],
+      "@screens": ["src/screens"],
+      "@reduxhooks": ["src/store/hooks.ts"],
+      "@store": ["src/store/*"],
+      "@slice": ["src/store/slice"],
+      "@utils": ["src/utils"]
+    }
   }
 }

@@ -4,7 +4,7 @@
     "slug": "karaworks",
     "version": "1.0.0",
     "orientation": "default",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/icon-karaworks.png",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "scheme": "karaworks",
@@ -28,9 +28,11 @@
         "expo-splash-screen",
         {
           "backgroundColor": "#ffffff",
-          "image": "./assets/splash-icon.png"
+          "image": "./assets/icon-karaworks.png",
+          "resizeMode": "contain"
         }
-      ]
+      ],
+      "expo-font"
     ]
   }
 }

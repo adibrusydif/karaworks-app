@@ -1,37 +1,46 @@
-import { Assets as NavigationAssets } from '@react-navigation/elements';
-import { DarkTheme, DefaultTheme } from '@react-navigation/native';
-import { Asset } from 'expo-asset';
+import {
+  DarkTheme,
+  DefaultTheme,
+  NavigationContainer,
+} from '@react-navigation/native';
 import { createURL } from 'expo-linking';
 import * as SplashScreen from 'expo-splash-screen';
 import * as React from 'react';
 import { useColorScheme } from 'react-native';
-import { Navigation } from './navigation';
-
-Asset.loadAsync([
-  ...NavigationAssets,
-  require('./assets/newspaper.png'),
-  require('./assets/bell.png'),
-]);
+import { useFonts } from 'expo-font';
+import Router from '@navigation';
+import Fonts from '@constants/Fonts';
 
 SplashScreen.preventAutoHideAsync();
 
 const prefix = createURL('/');
 
+const FONT_FAMILY = {
+  [Fonts.OPEN_SAUCE_ONE_EXTRA_BOLD]: require('./assets/fonts/OpenSauceOne-ExtraBold.ttf'),
+  [Fonts.OPEN_SAUCE_ONE_BOLD]: require('./assets/fonts/OpenSauceOne-Bold.ttf'),
+  [Fonts.OPEN_SAUCE_ONE_SEMIBOLD]: require('./assets/fonts/OpenSauceOne-SemiBold.ttf'),
+  [Fonts.OPEN_SAUCE_ONE_MEDIUM]: require('./assets/fonts/OpenSauceOne-Medium.ttf'),
+  [Fonts.OPEN_SAUCE_ONE_REGULAR]: require('./assets/fonts/OpenSauceOne-Regular.ttf'),
+  [Fonts.OPEN_SAUCE_ONE_LIGHT]: require('./assets/fonts/OpenSauceOne-Light.ttf'),
+};
+
 export function App() {
   const colorScheme = useColorScheme();
 
-  const theme = colorScheme === 'dark' ? DarkTheme : DefaultTheme
+  const theme = colorScheme === 'dark' ? DarkTheme : DefaultTheme;
+
+  const [loaded] = useFonts(FONT_FAMILY);
+
+  if (!loaded) {
+    return null;
+  }
 
   return (
-    <Navigation
+    <NavigationContainer
       theme={theme}
-      linking={{
-        enabled: 'auto',
-        prefixes: [prefix],
-      }}
-      onReady={() => {
-        SplashScreen.hideAsync();
-      }}
-    />
+      linking={{ prefixes: [prefix] }}
+      onReady={() => SplashScreen.hideAsync()}>
+      <Router />
+    </NavigationContainer>
   );
 }

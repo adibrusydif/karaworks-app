@@ -28,8 +28,7 @@
         "expo-splash-screen",
         {
           "backgroundColor": "#ffffff",
-          "image": "./assets/icon-karaworks.png",
-          "resizeMode": "contain"
+          "image": "./assets/icon-karaworks.png"
         }
       ],
       "expo-font"

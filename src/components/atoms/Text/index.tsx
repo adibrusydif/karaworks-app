@@ -75,7 +75,7 @@ const Text: React.FC<CustomTextProps> = ({
   const fontType = type && fontTypes[type];
   const colorStyle = color
     ? { color: Colors[color as keyof typeof Colors] || color }
-    : { color: Colors.NEUTRAL_90 };
+    : { color: Colors.PRIMARY_MAIN };
 
   const customStyle = StyleSheet.create({
     text: {

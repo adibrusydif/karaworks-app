@@ -9,7 +9,7 @@ import { RootStackParamList } from '../types/navigation';
 const Stack = createStackNavigator<RootStackParamList>();
 
 const RootNavigator = () => {
-  const token = 'token';
+  const token = '';
   const role: string | null = 'hotel';
 
   return (

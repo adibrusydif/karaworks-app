@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import { Image, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { StackScreenProps } from '@react-navigation/stack';
 import { Button, Text, TextInput, View } from '@components';
-import styles from './styles';
 import { Images } from '@assets';
+import { AuthStackParamList } from '@type/navigation';
+import styles from './styles';
+
+type Props = StackScreenProps<AuthStackParamList, 'Login'>;
 
 const PREFIX = '+62';
 
-const LoginScreen = () => {
+const LoginScreen: React.FC<Props> = ({ navigation }) => {
   const [phone, setPhone] = useState(PREFIX);
 
   const handleChangeText = (raw: string) => {
@@ -48,7 +52,7 @@ const LoginScreen = () => {
           />
           <Button label="Sign In" />
 
-          <Pressable>
+          <Pressable onPress={() => navigation.navigate('Signup')}>
             <Text center type="body1Regular" color="NEUTRAL_70">
               Don’t have an account?{' '}
               <Text type="body1SemiBold">Sign Up Now</Text>

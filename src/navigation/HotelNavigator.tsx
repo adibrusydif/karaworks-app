@@ -1,6 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { HotelStackParamList } from '../types/navigation';
+import { HotelStackParamList } from '@type/navigation';
 import HotelTabNavigator from './tab/HotelTabNavigator';
 import { HotelCreateEventScreen, HotelEventDetailScreen } from '@screens';
 import { Colors } from '@constants';

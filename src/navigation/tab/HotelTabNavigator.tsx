@@ -1,7 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { HotelTabParamList } from '@type/navigation';
 import { Colors } from '@constants';
-import { HotelTabParamList } from '../../types/navigation';
 import {
   HotelBillScreen,
   HotelEventScreen,

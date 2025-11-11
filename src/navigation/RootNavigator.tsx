@@ -1,10 +1,9 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-
+import { RootStackParamList } from '@type/navigation';
 import AuthNavigator from './AuthNavigator';
 import WorkerNavigator from './WorkerNavigator';
 import HotelNavigator from './HotelNavigator';
-import { RootStackParamList } from '../types/navigation';
 
 const Stack = createStackNavigator<RootStackParamList>();
 

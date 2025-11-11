@@ -1,7 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { WorkerTabParamList } from '@type/navigation';
 import { Colors } from '@constants';
-import { WorkerTabParamList } from '../../types/navigation';
 import {
   WorkerEventScreen,
   WorkerExploreScreen,

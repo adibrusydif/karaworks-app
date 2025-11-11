@@ -18,6 +18,7 @@ module.exports = function (api) {
             '@reduxhooks': './src/store/hooks.ts',
             '@store': './src/store',
             '@slice': './src/store/slice',
+            '@type': './src/type',
             '@utils': './src/utils',
           },
         },

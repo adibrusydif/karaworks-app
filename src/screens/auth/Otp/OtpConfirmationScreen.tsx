@@ -43,7 +43,10 @@ const OtpConfirmationScreen: React.FC<Props> = ({ navigation }) => {
       <View
         style={[styles.footer, shadowTypes.shadow_3]}
         paddingBottom={paddingBottom}>
-        <Button label="Submit" />
+        <Button
+          label="Submit"
+          onPress={() => navigation.navigate('SuccessOtp')}
+        />
       </View>
     </View>
   );

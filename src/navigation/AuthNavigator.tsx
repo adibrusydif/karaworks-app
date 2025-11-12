@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { AuthStackParamList } from '@type/navigation';
-import { LoginScreen, SignupScreen } from '@screens';
+import { LoginScreen, OtpConfirmationScreen, SignupScreen } from '@screens';
 import { Colors } from '@constants';
 
 const Stack = createStackNavigator<AuthStackParamList>();
@@ -14,6 +14,7 @@ const AuthNavigator = () => (
     }}>
     <Stack.Screen name="Login" component={LoginScreen} />
     <Stack.Screen name="Signup" component={SignupScreen} />
+    <Stack.Screen name="OtpConfirmation" component={OtpConfirmationScreen} />
   </Stack.Navigator>
 );
 

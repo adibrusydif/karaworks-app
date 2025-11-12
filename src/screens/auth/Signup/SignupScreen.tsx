@@ -4,10 +4,14 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button, Text, TextInput, View } from '@components';
 import { Images } from '@assets';
 import styles from './styles';
+import { StackScreenProps } from '@react-navigation/stack';
+import { AuthStackParamList } from '@type/navigation';
+
+type Props = StackScreenProps<AuthStackParamList, 'Signup'>;
 
 const PREFIX = '+62';
 
-const SignupScreen = () => {
+const SignupScreen: React.FC<Props> = ({ navigation }) => {
   const [fullName, setFullName] = useState('');
   const [phone, setPhone] = useState(PREFIX);
 
@@ -52,9 +56,12 @@ const SignupScreen = () => {
             onChangeText={handleChangeText}
             keyboardType="phone-pad"
           />
-          <Button label="Sign Up" />
+          <Button
+            label="Sign Up"
+            onPress={() => navigation.navigate('OtpConfirmation')}
+          />
 
-          <Pressable>
+          <Pressable onPress={() => navigation.popTo('Login')}>
             <Text center type="body1Regular" color="NEUTRAL_70">
               Already have an account?{' '}
               <Text type="body1SemiBold">Sign In Now</Text>

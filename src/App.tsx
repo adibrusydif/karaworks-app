@@ -1,3 +1,5 @@
+import * as React from 'react';
+import { useColorScheme } from 'react-native';
 import {
   DarkTheme,
   DefaultTheme,
@@ -5,9 +7,8 @@ import {
 } from '@react-navigation/native';
 import { createURL } from 'expo-linking';
 import * as SplashScreen from 'expo-splash-screen';
-import * as React from 'react';
-import { useColorScheme } from 'react-native';
 import { useFonts } from 'expo-font';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Fonts from '@constants/Fonts';
 import RootNavigator from '@navigation/RootNavigator';
 
@@ -36,11 +37,13 @@ export function App() {
   }
 
   return (
-    <NavigationContainer
-      theme={theme}
-      linking={{ prefixes: [prefix] }}
-      onReady={() => SplashScreen.hideAsync()}>
-      <RootNavigator />
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer
+        theme={theme}
+        linking={{ prefixes: [prefix] }}
+        onReady={() => SplashScreen.hideAsync()}>
+        <RootNavigator />
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }

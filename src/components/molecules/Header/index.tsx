@@ -1,11 +1,11 @@
 import React from 'react';
 import { Pressable, StatusBar } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Icons } from '@assets';
 import { Text, View } from '@components/atoms';
 import { Colors } from '@constants';
-import styles from './styles';
 import { scale } from '@utils';
-import { Icons } from '@assets';
+import styles from './styles';
 
 interface HeaderProps {
   label?: string;

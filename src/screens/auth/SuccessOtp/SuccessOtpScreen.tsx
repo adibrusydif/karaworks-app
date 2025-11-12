@@ -1,12 +1,12 @@
 import React from 'react';
 import { Image } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
-import { View, Text, Button } from '@components';
-import styles from './styles';
 import { Images } from '@assets';
+import { View, Text, Button } from '@components';
 import { shadowTypes } from '@constants';
 import { useInset } from '@hooks';
 import { AuthStackParamList } from '@type/navigation';
+import styles from './styles';
 
 type Props = StackScreenProps<AuthStackParamList, 'SuccessOtp'>;
 

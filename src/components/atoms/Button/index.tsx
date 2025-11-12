@@ -4,9 +4,9 @@ import {
   TouchableOpacity,
   TouchableOpacityProps,
 } from 'react-native';
-import Text, { ColorType, FontTypeStyle } from '../Text';
 import { Colors } from '@constants';
 import { scale } from '@utils';
+import Text, { ColorType, FontTypeStyle } from '../Text';
 import styles from './styles';
 
 interface ButtonProps extends TouchableOpacityProps {

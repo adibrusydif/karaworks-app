@@ -5,13 +5,11 @@ import {
   TextInput as TextInputRN,
   TouchableOpacity,
 } from 'react-native';
-
-import View from '../View';
-import Text from '../Text';
-
-import styles from './styles';
-import { Colors } from '@constants';
 import { SvgProps } from 'react-native-svg';
+import { Colors } from '@constants';
+import Text from '../Text';
+import View from '../View';
+import styles from './styles';
 
 type IconRightProp = React.ReactElement | React.ComponentType<SvgProps>;
 

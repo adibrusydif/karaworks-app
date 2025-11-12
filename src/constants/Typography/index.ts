@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
-import Fonts from '../Fonts';
 import { scale } from '@utils';
+import Fonts from '../Fonts';
 
 export const fontTypes = StyleSheet.create({
   // Heading

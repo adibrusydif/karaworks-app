@@ -1,9 +1,9 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
+import { Colors } from '@constants';
+import { HotelCreateEventScreen, HotelEventDetailScreen } from '@screens';
 import { HotelStackParamList } from '@type/navigation';
 import HotelTabNavigator from './tab/HotelTabNavigator';
-import { HotelCreateEventScreen, HotelEventDetailScreen } from '@screens';
-import { Colors } from '@constants';
 
 const Stack = createStackNavigator<HotelStackParamList>();
 

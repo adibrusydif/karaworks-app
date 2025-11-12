@@ -1,13 +1,13 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { AuthStackParamList } from '@type/navigation';
+import { Colors } from '@constants';
 import {
   LoginScreen,
   OtpConfirmationScreen,
   SignupScreen,
   SuccessOtpScreen,
 } from '@screens';
-import { Colors } from '@constants';
+import { AuthStackParamList } from '@type/navigation';
 
 const Stack = createStackNavigator<AuthStackParamList>();
 

@@ -1,12 +1,12 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { HotelTabParamList } from '@type/navigation';
 import { Colors } from '@constants';
 import {
   HotelBillScreen,
   HotelEventScreen,
   HotelProfileScreen,
 } from '@screens';
+import { HotelTabParamList } from '@type/navigation';
 
 const Tab = createBottomTabNavigator<HotelTabParamList>();
 

@@ -1,13 +1,23 @@
 module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint', 'unused-imports', 'react', 'react-native'],
-  extends: ['@react-native-community', 'plugin:@typescript-eslint/recommended'],
+  plugins: [
+    '@typescript-eslint',
+    'unused-imports',
+    'react',
+    'react-native',
+    'import',
+  ],
+  extends: [
+    '@react-native-community',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:import/typescript',
+  ],
   overrides: [
     {
       files: ['*.ts', '*.tsx'],
       rules: {
-        // Prefer TS rule over base
+        // --- TypeScript rules ---
         '@typescript-eslint/no-require-imports': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
         'no-unused-vars': 'off',
@@ -20,7 +30,7 @@ module.exports = {
           },
         ],
 
-        // Error on unused imports
+        // --- Unused import cleanup ---
         'unused-imports/no-unused-imports': 'error',
         'unused-imports/no-unused-vars': [
           'error',
@@ -31,7 +41,7 @@ module.exports = {
           },
         ],
 
-        // Existing rules
+        // --- Other rules ---
         '@typescript-eslint/no-shadow': ['error'],
         '@typescript-eslint/func-call-spacing': 'off',
         'react-native/no-inline-styles': ['error'],
@@ -40,9 +50,48 @@ module.exports = {
         'no-console': ['error', { allow: ['warn'] }],
         'react-hooks/exhaustive-deps': 'off',
         'react/jsx-key': ['error', { checkFragmentShorthand: true }],
+
+        // --- Import order rule ---
+        'import/order': [
+          'error',
+          {
+            groups: [
+              'external', // Packages from node_modules
+              'builtin', // Node "builtin" modules (fs, path, etc)
+              'internal', // Aliases like @/utils, @/components, etc.
+              ['parent', 'sibling', 'index'], // Relative imports
+              'object', // import type {...} from ...
+              'type',
+            ],
+            pathGroups: [
+              {
+                pattern: '@(react|react-native)',
+                group: 'external',
+                position: 'before',
+              },
+              {
+                pattern: '@/**',
+                group: 'internal',
+              },
+            ],
+            pathGroupsExcludedImportTypes: ['react'],
+            alphabetize: {
+              order: 'asc',
+              caseInsensitive: true,
+            },
+          },
+        ],
       },
     },
   ],
+  settings: {
+    'import/resolver': {
+      typescript: {}, // agar eslint bisa resolve path alias tsconfig
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      },
+    },
+  },
   env: {
     jest: true,
   },

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Image, Pressable } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { StackScreenProps } from '@react-navigation/stack';
-import { Button, Text, TextInput, View } from '@components';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Images } from '@assets';
+import { Button, Text, TextInput, View } from '@components';
 import { AuthStackParamList } from '@type/navigation';
 import styles from './styles';
 

@@ -6,8 +6,8 @@ import {
   ViewStyle,
   StyleSheet,
 } from 'react-native';
-import { ColorType } from '../Text';
 import { Colors } from '@constants';
+import { ColorType } from '../Text';
 
 interface CustomViewProps extends ViewProps {
   padding?: number;

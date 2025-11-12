@@ -1,5 +1,5 @@
-import { deviceHeight, deviceWidth, scale } from '@utils';
 import { StyleSheet } from 'react-native';
+import { deviceHeight, deviceWidth, scale } from '@utils';
 
 const styles = StyleSheet.create({
   container: {

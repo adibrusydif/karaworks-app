@@ -5,9 +5,9 @@ import {
   DefaultTheme,
   NavigationContainer,
 } from '@react-navigation/native';
+import { useFonts } from 'expo-font';
 import { createURL } from 'expo-linking';
 import * as SplashScreen from 'expo-splash-screen';
-import { useFonts } from 'expo-font';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Fonts from '@constants/Fonts';
 import RootNavigator from '@navigation/RootNavigator';

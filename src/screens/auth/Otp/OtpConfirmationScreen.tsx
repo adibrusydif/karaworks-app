@@ -1,12 +1,12 @@
 import React from 'react';
-import { Button, Header, Text, TextInput, View } from '@components';
 import { Image } from 'react-native';
-import { Images } from '@assets';
-import styles from './styles';
 import { StackScreenProps } from '@react-navigation/stack';
-import { AuthStackParamList } from '@type/navigation';
+import { Images } from '@assets';
+import { Button, Header, Text, TextInput, View } from '@components';
 import { shadowTypes } from '@constants';
 import { useInset } from '@hooks';
+import { AuthStackParamList } from '@type/navigation';
+import styles from './styles';
 
 type Props = StackScreenProps<AuthStackParamList, 'OtpConfirmation'>;
 

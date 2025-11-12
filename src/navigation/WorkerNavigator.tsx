@@ -1,9 +1,9 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
+import { Colors } from '@constants';
+import { WorkerEventDetailScreen } from '@screens';
 import { WorkerStackParamList } from '@type/navigation';
 import WorkerTabNavigator from './tab/WorkerTabNavigator';
-import { WorkerEventDetailScreen } from '@screens';
-import { Colors } from '@constants';
 
 const Stack = createStackNavigator<WorkerStackParamList>();
 

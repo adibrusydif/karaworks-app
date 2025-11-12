@@ -1,5 +1,5 @@
-import { scale } from '@utils';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { scale } from '@utils';
 
 const useInset = () => {
   const insets = useSafeAreaInsets();

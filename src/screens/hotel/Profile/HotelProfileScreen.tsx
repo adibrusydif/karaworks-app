@@ -1,11 +1,14 @@
 import React from 'react';
-import { View, Text } from '@components';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Text, View } from '@components';
 
 const HotelProfileScreen = () => {
   return (
-    <View flex={1} padding={16}>
-      <Text>Profile</Text>
-    </View>
+    <SafeAreaView edges={['top']}>
+      <View padding={16}>
+        <Text type="subtitle1Medium">Profile</Text>
+      </View>
+    </SafeAreaView>
   );
 };
 

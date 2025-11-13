@@ -8,7 +8,7 @@ import WorkerNavigator from './WorkerNavigator';
 const Stack = createStackNavigator<RootStackParamList>();
 
 const RootNavigator = () => {
-  const token = '';
+  const token = 'token';
   const role: string | null = 'hotel';
 
   return (

@@ -23,6 +23,7 @@ const HotelTabNavigator = () => {
     <Tab.Navigator
       screenOptions={{
         animation: 'shift',
+        headerShown: false,
         sceneStyle: { backgroundColor: Colors.NEUTRAL_10 },
         tabBarStyle: { backgroundColor: Colors.WHITE },
       }}

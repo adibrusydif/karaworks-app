@@ -10,6 +10,7 @@ const useInset = () => {
     left: insets.left,
     right: insets.right,
     paddingBottom: insets.bottom ? insets.bottom : scale(16),
+    paddingTop: insets.top ? insets.top : scale(16),
   };
 };
 

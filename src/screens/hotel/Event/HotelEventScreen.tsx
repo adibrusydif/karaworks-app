@@ -12,7 +12,7 @@ import { View, Text, FloatingButton } from '@components';
 import { Colors } from '@constants';
 import { useInset } from '@hooks';
 import { deviceWidth } from '@utils';
-import TabListEvent from './Components/TabListEvent';
+import TabListEvent from './components/TabListEvent';
 import styles from './styles';
 
 const routes = [
@@ -28,7 +28,7 @@ const renderScene = SceneMap({
 });
 
 const HotelEventScreen = () => {
-  const { top } = useInset();
+  const { paddingTop } = useInset();
 
   const [index, setIndex] = useState(0);
 
@@ -47,7 +47,7 @@ const HotelEventScreen = () => {
   };
 
   return (
-    <View flex={1} padding={16} paddingTop={top}>
+    <View flex={1} padding={16} paddingTop={paddingTop}>
       <StatusBar
         translucent
         backgroundColor={'transparent'}

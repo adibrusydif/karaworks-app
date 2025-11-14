@@ -1,7 +1,11 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Colors } from '@constants';
-import { HotelCreateEventScreen, HotelEventDetailScreen } from '@screens';
+import {
+  HotelBillDetailScreen,
+  HotelCreateEventScreen,
+  HotelEventDetailScreen,
+} from '@screens';
 import { HotelStackParamList } from '@type/navigation';
 import HotelTabNavigator from './tab/HotelTabNavigator';
 
@@ -23,6 +27,7 @@ const HotelNavigator = () => {
         name="HotelEventDetail"
         component={HotelEventDetailScreen}
       />
+      <Stack.Screen name="HotelBillDetail" component={HotelBillDetailScreen} />
     </Stack.Navigator>
   );
 };

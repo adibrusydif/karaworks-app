@@ -1,3 +1,4 @@
+export { default as HotelBillDetailScreen } from './BillDetail/HotelBillDetailScreen';
 export { default as HotelBillScreen } from './Bill/HotelBillScreen';
 export { default as HotelCreateEventScreen } from './CreateEvent/HotelCreateEventScreen';
 export { default as HotelEventDetailScreen } from './EventDetail/HotelEventDetailScreen';

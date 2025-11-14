@@ -5,7 +5,6 @@ import {
   TouchableOpacityProps,
 } from 'react-native';
 import { Colors } from '@constants';
-import { scale } from '@utils';
 import Text, { ColorType, FontTypeStyle } from '../Text';
 import styles from './styles';
 
@@ -26,7 +25,7 @@ const Button: React.FC<ButtonProps> = ({
   buttonColor = 'PRIMARY_MAIN',
   disabled,
   isLoading,
-  height = scale(48),
+  height = 48,
   width,
   typeText = 'buttonSemiBold',
   elevation = true,

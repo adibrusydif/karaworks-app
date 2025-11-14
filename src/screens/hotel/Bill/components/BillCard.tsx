@@ -1,10 +1,15 @@
 import React from 'react';
+import { Pressable } from 'react-native';
 import { View, Text, Button } from '@components';
 import styles from './styles';
 
-const BillCard = () => {
+interface BillCardProps {
+  onPressDetail?: () => void;
+}
+
+const BillCard: React.FC<BillCardProps> = ({ onPressDetail }) => {
   return (
-    <View style={styles.container}>
+    <Pressable style={styles.container}>
       <View row justifyContent="space-between" alignItems="center">
         <Text type="body1SemiBold">November 2025</Text>
         <Text type="body2Medium">Rp2.000.000</Text>
@@ -29,10 +34,11 @@ const BillCard = () => {
             width={60}
             labelColor="PRIMARY_MAIN"
             buttonColor="PRIMARY_SURFACE"
+            onPress={onPressDetail}
           />
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 };
 

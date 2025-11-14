@@ -6,7 +6,9 @@ import IcCalendar from './ic_calendar.svg';
 import IcClock from './ic_clock.svg';
 import IcEvent from './ic_event.svg';
 import IcExplore from './ic_explore.svg';
+import IcLogout from './ic_logout.svg';
 import IcProfile from './ic_profile.svg';
+import IcUserRemove from './ic_user_remove.svg';
 
 export const Icons = {
   IcAdd,
@@ -17,5 +19,7 @@ export const Icons = {
   IcClock,
   IcEvent,
   IcExplore,
+  IcLogout,
   IcProfile,
+  IcUserRemove,
 };

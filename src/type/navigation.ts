@@ -23,6 +23,7 @@ export type HotelStackParamList = {
   HotelCreateEvent: undefined;
   HotelEventDetail: undefined;
   HotelBillDetail: undefined;
+  EditProfile: undefined;
 };
 
 export type HotelTabParamList = {

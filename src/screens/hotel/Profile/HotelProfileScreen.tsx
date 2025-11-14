@@ -1,10 +1,19 @@
 import React from 'react';
+import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
+import { CompositeScreenProps } from '@react-navigation/native';
+import { StackScreenProps } from '@react-navigation/stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Icons, Images } from '@assets';
 import { ActionItem, ProfileUser, Text, View } from '@components';
+import { HotelStackParamList, HotelTabParamList } from '@type/navigation';
 import styles from './styles';
 
-const HotelProfileScreen = () => {
+type Props = CompositeScreenProps<
+  BottomTabScreenProps<HotelTabParamList, 'HotelProfile'>,
+  StackScreenProps<HotelStackParamList>
+>;
+
+const HotelProfileScreen: React.FC<Props> = ({ navigation }) => {
   return (
     <SafeAreaView edges={['top']} style={styles.container}>
       <View paddingBottom={16}>
@@ -22,7 +31,7 @@ const HotelProfileScreen = () => {
         image={Images.dummyUserProfile}
         name="User Name"
         contact="User Contact"
-        onEdit={() => {}}
+        onEdit={() => navigation.navigate('EditProfile')}
       />
       <View height={1} backgroundColor="NEUTRAL_30" />
       <ActionItem

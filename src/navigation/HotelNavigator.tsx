@@ -2,6 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Colors } from '@constants';
 import {
+  EditProfileScreen,
   HotelBillDetailScreen,
   HotelCreateEventScreen,
   HotelEventDetailScreen,
@@ -28,6 +29,7 @@ const HotelNavigator = () => {
         component={HotelEventDetailScreen}
       />
       <Stack.Screen name="HotelBillDetail" component={HotelBillDetailScreen} />
+      <Stack.Screen name="EditProfile" component={EditProfileScreen} />
     </Stack.Navigator>
   );
 };

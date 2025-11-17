@@ -38,6 +38,7 @@ export type HotelTabParamList = {
 export type WorkerStackParamList = {
   WorkerTabs: undefined;
   WorkerEventDetail: undefined;
+  EditProfile: undefined;
 };
 
 export type WorkerTabParamList = {

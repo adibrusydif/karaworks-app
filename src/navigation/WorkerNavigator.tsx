@@ -1,7 +1,11 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Colors } from '@constants';
-import { EditProfileScreen, WorkerEventDetailScreen } from '@screens';
+import {
+  EditProfileScreen,
+  WorkerEditBankScreen,
+  WorkerEventDetailScreen,
+} from '@screens';
 import { WorkerStackParamList } from '@type/navigation';
 import WorkerTabNavigator from './tab/WorkerTabNavigator';
 
@@ -20,6 +24,7 @@ const WorkerNavigator = () => {
         component={WorkerEventDetailScreen}
       />
       <Stack.Screen name="EditProfile" component={EditProfileScreen} />
+      <Stack.Screen name="WorkerEditBank" component={WorkerEditBankScreen} />
     </Stack.Navigator>
   );
 };

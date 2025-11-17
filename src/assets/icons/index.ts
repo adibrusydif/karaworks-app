@@ -1,4 +1,5 @@
 import IcAdd from './ic_add.svg';
+import IcArrowDown from './ic_arrow_down.svg';
 import IcArrowLeft from './ic_arrow_left.svg';
 import IcBell from './ic_bell.svg';
 import IcBill from './ic_bill.svg';
@@ -12,6 +13,7 @@ import IcUserRemove from './ic_user_remove.svg';
 
 export const Icons = {
   IcAdd,
+  IcArrowDown,
   IcArrowLeft,
   IcBell,
   IcBill,

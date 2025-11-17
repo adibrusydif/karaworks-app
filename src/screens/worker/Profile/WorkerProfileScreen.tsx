@@ -44,6 +44,7 @@ const WorkerProfileScreen: React.FC<Props> = ({ navigation }) => {
           height={34}
           buttonColor="PRIMARY_SURFACE"
           labelColor="PRIMARY_MAIN"
+          onPress={() => navigation.navigate('WorkerEditBank')}
         />
       </View>
       <View height={1} backgroundColor="NEUTRAL_30" />

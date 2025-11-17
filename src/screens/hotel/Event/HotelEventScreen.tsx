@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Image, Pressable, StatusBar } from 'react-native';
+import { Image, StatusBar } from 'react-native';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { CompositeScreenProps } from '@react-navigation/native';
 import { StackScreenProps } from '@react-navigation/stack';
@@ -10,8 +10,8 @@ import {
   TabBarProps,
   TabView,
 } from 'react-native-tab-view';
-import { Icons, Images } from '@assets';
-import { View, Text, FloatingButton } from '@components';
+import { Images } from '@assets';
+import { View, FloatingButton, HeaderHome } from '@components';
 import { Colors } from '@constants';
 import { useInset } from '@hooks';
 import { HotelStackParamList, HotelTabParamList } from '@type/navigation';
@@ -62,18 +62,7 @@ const HotelEventScreen: React.FC<Props> = ({ navigation }) => {
         backgroundColor={'transparent'}
         barStyle="dark-content"
       />
-      <View row justifyContent="space-between" alignItems="center">
-        <Text type="subtitle1SemiBold">{'Kara\nWorks.'}</Text>
-        <Pressable style={styles.iconContainer}>
-          <Icons.IcBell stroke={'white'} />
-        </Pressable>
-      </View>
-      <View paddingVertical={16} gap={4}>
-        <Text type="body2Regular" color="NEUTRAL_70">
-          Welcome Back,
-        </Text>
-        <Text type="subtitle1Medium">Hotel Harris</Text>
-      </View>
+      <HeaderHome name="Hotel Harris" />
 
       <TabView
         navigationState={{ index, routes }}

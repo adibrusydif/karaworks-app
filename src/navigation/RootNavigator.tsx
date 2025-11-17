@@ -9,7 +9,7 @@ const Stack = createStackNavigator<RootStackParamList>();
 
 const RootNavigator = () => {
   const token = 'token';
-  const role: string | null = 'hotel';
+  const role: string | null = 'worker';
 
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>

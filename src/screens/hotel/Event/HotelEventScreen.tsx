@@ -20,7 +20,7 @@ import TabListEvent from './components/TabListEvent';
 import styles from './styles';
 
 type Props = CompositeScreenProps<
-  BottomTabScreenProps<HotelTabParamList, 'HotelBill'>,
+  BottomTabScreenProps<HotelTabParamList, 'HotelEvent'>,
   StackScreenProps<HotelStackParamList>
 >;
 

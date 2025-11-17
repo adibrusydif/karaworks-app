@@ -15,6 +15,7 @@ type IconRightProp = React.ReactElement | React.ComponentType<SvgProps>;
 
 interface InputTextProps extends TextInputProps {
   label?: string;
+  prefix?: string;
   desc?: string;
   isPassword?: boolean;
   iconRight?: IconRightProp;
@@ -27,6 +28,7 @@ type InputTextWithRefProps = InputTextProps & { ref?: React.Ref<TextInputRN> };
 
 const TextInput = ({
   label,
+  prefix,
   desc,
   isPassword,
   iconRight,
@@ -61,6 +63,7 @@ const TextInput = ({
         ]}
         disabled={disabled}
         onPress={onPress}>
+        {prefix && <Text type="body2Regular">{prefix}</Text>}
         <TextInputRN
           ref={ref}
           style={styles.inputContainer}

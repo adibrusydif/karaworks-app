@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { Image, Pressable, StatusBar } from 'react-native';
+import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
+import { CompositeScreenProps } from '@react-navigation/native';
+import { StackScreenProps } from '@react-navigation/stack';
 import {
   Route,
   SceneMap,
@@ -11,9 +14,15 @@ import { Icons, Images } from '@assets';
 import { View, Text, FloatingButton } from '@components';
 import { Colors } from '@constants';
 import { useInset } from '@hooks';
+import { HotelStackParamList, HotelTabParamList } from '@type/navigation';
 import { deviceWidth } from '@utils';
 import TabListEvent from './components/TabListEvent';
 import styles from './styles';
+
+type Props = CompositeScreenProps<
+  BottomTabScreenProps<HotelTabParamList, 'HotelBill'>,
+  StackScreenProps<HotelStackParamList>
+>;
 
 const routes = [
   { key: 'posted', title: 'Posted' },
@@ -27,7 +36,7 @@ const renderScene = SceneMap({
   finished: () => <TabListEvent />,
 });
 
-const HotelEventScreen = () => {
+const HotelEventScreen: React.FC<Props> = ({ navigation }) => {
   const { paddingTop } = useInset();
 
   const [index, setIndex] = useState(0);
@@ -74,7 +83,10 @@ const HotelEventScreen = () => {
         renderTabBar={renderTabBar}
       />
 
-      <FloatingButton label="Create Event" />
+      <FloatingButton
+        label="Create Event"
+        onPress={() => navigation.navigate('HotelCreateEvent')}
+      />
       <Image source={Images.bgUp} style={styles.bgUp} />
     </View>
   );

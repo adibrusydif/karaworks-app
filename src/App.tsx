@@ -8,6 +8,7 @@ import {
 import { useFonts } from 'expo-font';
 import { createURL } from 'expo-linking';
 import * as SplashScreen from 'expo-splash-screen';
+import { KeyboardProvider } from 'react-native-keyboard-controller';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Fonts from '@constants/Fonts';
 import RootNavigator from '@navigation/RootNavigator';
@@ -38,12 +39,14 @@ export function App() {
 
   return (
     <SafeAreaProvider>
-      <NavigationContainer
-        theme={theme}
-        linking={{ prefixes: [prefix] }}
-        onReady={() => SplashScreen.hideAsync()}>
-        <RootNavigator />
-      </NavigationContainer>
+      <KeyboardProvider statusBarTranslucent>
+        <NavigationContainer
+          theme={theme}
+          linking={{ prefixes: [prefix] }}
+          onReady={() => SplashScreen.hideAsync()}>
+          <RootNavigator />
+        </NavigationContainer>
+      </KeyboardProvider>
     </SafeAreaProvider>
   );
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, TouchableOpacityProps } from 'react-native';
 import { Icons } from '@assets';
+import { Colors } from '@constants';
 import { scale } from '@utils';
 import Text from '../Text';
 import styles from './styles';
@@ -26,7 +27,7 @@ const FloatingButton = ({
       activeOpacity={0.9}
       style={[styles.container, { bottom, right, left, top }]}
       {...props}>
-      <Icons.IcAdd />
+      <Icons.IcAdd stroke={Colors.WHITE} />
       <Text type="buttonSemiBold" color="NEUTRAL_10">
         {label}
       </Text>

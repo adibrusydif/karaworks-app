@@ -9,21 +9,18 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     borderWidth: 1,
     borderRadius: 6,
-    paddingLeft: scale(8),
+    paddingHorizontal: scale(8),
     borderColor: Colors.NEUTRAL_40,
     paddingVertical: 0,
-    height: scale(46),
-    gap: scale(8),
+    height: scale(98),
   },
   inputContainer: {
     flex: 1,
     ...fontTypes.body2Regular,
     color: Colors.PRIMARY_MAIN,
     paddingVertical: scale(8),
-  },
-  iconContainer: {
-    padding: scale(8),
-    paddingLeft: scale(16),
+    textAlignVertical: 'top',
+    height: scale(90),
   },
 });
 

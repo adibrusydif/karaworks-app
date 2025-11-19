@@ -1,13 +1,12 @@
 import React from 'react';
 import { ScrollView } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
-import { View, Header, Text, Button } from '@components';
+import { View, Header, Text, Button, TabFilter } from '@components';
 import { shadowTypes } from '@constants';
 import { useInset } from '@hooks';
 import { TabItem } from '@type/models/common';
 import { HotelStackParamList } from '@type/navigation';
 import EventInfo from './components/EventInfo';
-import TabFilter from './components/TabFilter';
 import UserItem from './components/UserItem';
 import styles from './styles';
 

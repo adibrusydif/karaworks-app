@@ -17,22 +17,6 @@ const styles = StyleSheet.create({
     lineHeight: 18,
   },
 
-  // Filter Tab
-  tabContainer: {
-    flexDirection: 'row',
-    borderBottomWidth: scale(1),
-    borderBottomColor: Colors.NEUTRAL_30,
-    backgroundColor: Colors.WHITE,
-  },
-  tabItem: {
-    padding: 12,
-    borderBottomWidth: scale(2),
-    borderBottomColor: 'transparent',
-  },
-  tabItemActive: {
-    borderBottomColor: Colors.PRIMARY_MAIN,
-  },
-
   // User Item
   userItemContainer: {
     borderWidth: 1,

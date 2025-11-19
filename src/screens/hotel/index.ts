@@ -4,3 +4,4 @@ export { default as HotelCreateEventScreen } from './CreateEvent/HotelCreateEven
 export { default as HotelEventDetailScreen } from './EventDetail/HotelEventDetailScreen';
 export { default as HotelEventScreen } from './Event/HotelEventScreen';
 export { default as HotelProfileScreen } from './Profile/HotelProfileScreen';
+export { default as HotelSuccessCreateEventScreen } from './SuccessCreateEvent/HotelSuccessCreateEventScreen';

@@ -6,6 +6,7 @@ import {
   HotelBillDetailScreen,
   HotelCreateEventScreen,
   HotelEventDetailScreen,
+  HotelSuccessCreateEventScreen,
 } from '@screens';
 import { HotelStackParamList } from '@type/navigation';
 import HotelTabNavigator from './tab/HotelTabNavigator';
@@ -23,6 +24,10 @@ const HotelNavigator = () => {
       <Stack.Screen
         name="HotelCreateEvent"
         component={HotelCreateEventScreen}
+      />
+      <Stack.Screen
+        name="HotelSuccessCreateEvent"
+        component={HotelSuccessCreateEventScreen}
       />
       <Stack.Screen
         name="HotelEventDetail"

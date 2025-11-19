@@ -10,5 +10,6 @@ export const Images = {
   dummyUserProfile: require('./img_dummy_user_profile.png'),
   logo: require('./img_logo.png'),
   otpConfirm: require('./img_otp.png'),
+  successCreateEvent: require('./img_success_create_event.png'),
   successOtp: require('./img_success_otp.png'),
 };

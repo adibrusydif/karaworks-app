@@ -21,6 +21,7 @@ export type AuthStackParamList = {
 export type HotelStackParamList = {
   HotelTabs: undefined;
   HotelCreateEvent: undefined;
+  HotelSuccessCreateEvent: undefined;
   HotelEventDetail: undefined;
   HotelBillDetail: undefined;
   EditProfile: undefined;

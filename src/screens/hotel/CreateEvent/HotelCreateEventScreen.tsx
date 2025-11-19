@@ -78,7 +78,10 @@ const HotelCreateEventScreen: React.FC<Props> = ({ navigation }) => {
       <View
         style={[styles.footer, shadowTypes.shadow_3]}
         paddingBottom={paddingBottom}>
-        <Button label="Create Event" />
+        <Button
+          label="Create Event"
+          onPress={() => navigation.navigate('HotelSuccessCreateEvent')}
+        />
       </View>
     </View>
   );

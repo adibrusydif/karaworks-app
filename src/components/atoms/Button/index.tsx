@@ -3,6 +3,7 @@ import {
   ActivityIndicator,
   TouchableOpacity,
   TouchableOpacityProps,
+  ViewStyle,
 } from 'react-native';
 import { Colors } from '@constants';
 import Text, { ColorType, FontTypeStyle } from '../Text';
@@ -17,6 +18,7 @@ interface ButtonProps extends TouchableOpacityProps {
   width?: number;
   typeText?: FontTypeStyle;
   elevation?: boolean;
+  style?: ViewStyle | ViewStyle[];
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -29,6 +31,7 @@ const Button: React.FC<ButtonProps> = ({
   width,
   typeText = 'buttonSemiBold',
   elevation = true,
+  style,
   ...props
 }) => {
   return (
@@ -44,6 +47,7 @@ const Button: React.FC<ButtonProps> = ({
           height,
           width,
         },
+        style,
       ]}
       disabled={disabled}
       {...props}>

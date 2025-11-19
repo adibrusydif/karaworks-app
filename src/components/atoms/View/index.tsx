@@ -50,6 +50,9 @@ interface CustomViewProps extends ViewProps {
   maxWidth?: DimensionValue;
   maxHeight?: DimensionValue;
   backgroundColor?: ColorType;
+  borderWidth?: number;
+  borderColor?: ColorType;
+  borderRadius?: number;
   opacity?: number;
   style?: ViewStyle | ViewStyle[];
 }
@@ -91,6 +94,9 @@ const CustomView = React.forwardRef<RNView, CustomViewProps>(
       maxWidth,
       maxHeight,
       backgroundColor,
+      borderWidth,
+      borderColor,
+      borderRadius,
       opacity,
       style,
       children,
@@ -117,6 +123,13 @@ const CustomView = React.forwardRef<RNView, CustomViewProps>(
       ? {
           backgroundColor:
             Colors[backgroundColor as keyof typeof Colors] || backgroundColor,
+        }
+      : {};
+
+    const borderColorStyle = borderColor
+      ? {
+          borderColor:
+            Colors[borderColor as keyof typeof Colors] || borderColor,
         }
       : {};
 
@@ -152,12 +165,16 @@ const CustomView = React.forwardRef<RNView, CustomViewProps>(
       maxWidth,
       maxHeight,
       backgroundColor,
+      borderWidth,
+      borderColor,
+      borderRadius,
       opacity,
     };
 
     const combinedStyle = StyleSheet.flatten([
       computedStyle,
       bgColorStyle,
+      borderColorStyle,
       style,
     ]);
 

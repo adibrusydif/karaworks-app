@@ -1,10 +1,18 @@
 import React from 'react';
 import { FlatList } from 'react-native';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { View, EventCard } from '@components';
+import { HotelStackParamList } from '@type/navigation';
 import styles from './styles';
 
+type NavProps = NavigationProp<HotelStackParamList>;
+
 const TabListEvent = () => {
-  const renderItem = () => <EventCard />;
+  const navigation = useNavigation<NavProps>();
+
+  const renderItem = () => (
+    <EventCard onPress={() => navigation.navigate('HotelEventDetail')} />
+  );
 
   return (
     <View>

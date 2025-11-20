@@ -14,6 +14,7 @@ import IcMoney from './ic_money.svg';
 import IcPeople from './ic_people.svg';
 import IcProfile from './ic_profile.svg';
 import IcUserRemove from './ic_user_remove.svg';
+import IcWallet from './ic_wallet.svg';
 import IcWhatsapp from './ic_whatsapp.svg';
 
 export const Icons = {
@@ -33,5 +34,6 @@ export const Icons = {
   IcPeople,
   IcProfile,
   IcUserRemove,
+  IcWallet,
   IcWhatsapp,
 };

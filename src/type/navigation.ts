@@ -41,6 +41,7 @@ export type WorkerStackParamList = {
   WorkerEventDetail: undefined;
   EditProfile: undefined;
   WorkerEditBank: undefined;
+  WorkerWallet: undefined;
 };
 
 export type WorkerTabParamList = {

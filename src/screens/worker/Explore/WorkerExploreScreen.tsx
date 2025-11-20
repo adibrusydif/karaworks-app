@@ -1,9 +1,9 @@
 import React from 'react';
-import { FlatList, Image } from 'react-native';
+import { FlatList, Image, StatusBar } from 'react-native';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { CompositeScreenProps } from '@react-navigation/native';
 import { StackScreenProps } from '@react-navigation/stack';
-import { Images } from '@assets';
+import { Icons, Images } from '@assets';
 import { View, Text, Button, EventCard, HeaderHome } from '@components';
 import { useInset } from '@hooks';
 import { WorkerStackParamList, WorkerTabParamList } from '@type/navigation';
@@ -26,14 +26,22 @@ const WorkerExploreScreen: React.FC<Props> = ({ navigation }) => {
 
   return (
     <View flex={1} padding={16} paddingTop={paddingTop}>
+      <StatusBar
+        translucent
+        backgroundColor={'transparent'}
+        barStyle="dark-content"
+      />
       <HeaderHome name="Fikri Sulaiman" onPressNotification={() => {}} />
 
       <View flex={1} gap={16}>
         <View style={styles.walletContainer}>
           <View gap={4}>
-            <Text type="captionRegular" color="NEUTRAL_50">
-              My Wallet
-            </Text>
+            <View row alignItems="center" gap={4}>
+              <Icons.IcWallet width={scale(12)} height={scale(12)} />
+              <Text type="captionRegular" color="NEUTRAL_50">
+                My Wallet
+              </Text>
+            </View>
             <Text type="subtitle2SemiBold">Rp500.000</Text>
           </View>
           <Button
@@ -41,6 +49,7 @@ const WorkerExploreScreen: React.FC<Props> = ({ navigation }) => {
             typeText="captionSemiBold"
             width={scale(72)}
             height={scale(32)}
+            onPress={() => navigation.navigate('WorkerWallet')}
           />
         </View>
 

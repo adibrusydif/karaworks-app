@@ -41,7 +41,7 @@ const WorkerWalletScreen: React.FC<Props> = ({ navigation }) => {
             typeText="captionSemiBold"
             width={scale(72)}
             height={scale(32)}
-            onPress={() => navigation.navigate('WorkerWallet')}
+            onPress={() => navigation.navigate('WorkerWithdraw')}
           />
         </View>
 

@@ -42,6 +42,8 @@ export type WorkerStackParamList = {
   EditProfile: undefined;
   WorkerEditBank: undefined;
   WorkerWallet: undefined;
+  WorkerWithdraw: undefined;
+  WorkerSuccessWithdraw: undefined;
 };
 
 export type WorkerTabParamList = {

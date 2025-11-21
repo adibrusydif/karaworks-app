@@ -5,7 +5,9 @@ import {
   EditProfileScreen,
   WorkerEditBankScreen,
   WorkerEventDetailScreen,
+  WorkerSuccessWithdrawScreen,
   WorkerWalletScreen,
+  WorkerWithdrawScreen,
 } from '@screens';
 import { WorkerStackParamList } from '@type/navigation';
 import WorkerTabNavigator from './tab/WorkerTabNavigator';
@@ -27,6 +29,11 @@ const WorkerNavigator = () => {
       <Stack.Screen name="EditProfile" component={EditProfileScreen} />
       <Stack.Screen name="WorkerEditBank" component={WorkerEditBankScreen} />
       <Stack.Screen name="WorkerWallet" component={WorkerWalletScreen} />
+      <Stack.Screen name="WorkerWithdraw" component={WorkerWithdrawScreen} />
+      <Stack.Screen
+        name="WorkerSuccessWithdraw"
+        component={WorkerSuccessWithdrawScreen}
+      />
     </Stack.Navigator>
   );
 };

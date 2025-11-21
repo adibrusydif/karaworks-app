@@ -12,4 +12,5 @@ export const Images = {
   otpConfirm: require('./img_otp.png'),
   successCreateEvent: require('./img_success_create_event.png'),
   successOtp: require('./img_success_otp.png'),
+  successWithdraw: require('./img_success_withdraw.png'),
 };

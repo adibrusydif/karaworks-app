@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 24,
   },
-  imgSuccessOtp: {
+  imgSuccess: {
     width: scale(180),
     height: scale(180),
   },

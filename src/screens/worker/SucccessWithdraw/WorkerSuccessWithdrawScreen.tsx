@@ -16,10 +16,7 @@ const WorkerSuccessWithdrawScreen = ({ navigation }: Props) => {
   return (
     <View flex={1}>
       <View style={styles.container}>
-        <Image
-          source={Images.successCreateEvent}
-          style={styles.imgSuccessOtp}
-        />
+        <Image source={Images.successWithdraw} style={styles.imgSuccess} />
         <View gap={4}>
           <Text center type="headingS" lineHeight={30}>
             {'Withdrawal Request Approved!'}

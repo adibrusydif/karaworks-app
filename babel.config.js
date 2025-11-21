@@ -15,7 +15,7 @@ module.exports = function (api) {
             '@hooks': './src/hooks',
             '@navigation': './src/navigation',
             '@screens': './src/screens',
-            '@reduxhooks': './src/store/hooks.ts',
+            '@storehooks': './src/store/hooks.ts',
             '@store': './src/store',
             '@slice': './src/store/slice',
             '@type': './src/type',

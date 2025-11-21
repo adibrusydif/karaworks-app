@@ -1,5 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
+import { useAppSelector } from '@store/hooks';
 import { RootStackParamList } from '@type/navigation';
 import AuthNavigator from './AuthNavigator';
 import HotelNavigator from './HotelNavigator';
@@ -8,8 +9,7 @@ import WorkerNavigator from './WorkerNavigator';
 const Stack = createStackNavigator<RootStackParamList>();
 
 const RootNavigator = () => {
-  const token = 'token';
-  const role: string | null = 'worker';
+  const { token, role } = useAppSelector((state) => state.auth);
 
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>

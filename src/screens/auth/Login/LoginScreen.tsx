@@ -4,6 +4,8 @@ import { StackScreenProps } from '@react-navigation/stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Images } from '@assets';
 import { Button, Text, TextInput, View } from '@components';
+import { setAuth } from '@store/slice/auth/authSlice';
+import { useAppDispatch } from '@storehooks';
 import { AuthStackParamList } from '@type/navigation';
 import styles from './styles';
 
@@ -12,6 +14,7 @@ type Props = StackScreenProps<AuthStackParamList, 'Login'>;
 const PREFIX = '+62';
 
 const LoginScreen: React.FC<Props> = ({ navigation }) => {
+  const dispatch = useAppDispatch();
   const [phone, setPhone] = useState(PREFIX);
 
   const handleChangeText = (raw: string) => {
@@ -29,6 +32,10 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
     const withoutPrefix = trimmed.replace(/^\+?62/, '');
     const digitsOnly = withoutPrefix.replace(/[^0-9]/g, '');
     setPhone(PREFIX + digitsOnly);
+  };
+
+  const handleLogin = () => {
+    dispatch(setAuth({ token: 'token', role: 'hotel' }));
   };
 
   return (
@@ -50,7 +57,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
             onChangeText={handleChangeText}
             keyboardType="phone-pad"
           />
-          <Button label="Sign In" />
+          <Button label="Sign In" onPress={handleLogin} />
 
           <Pressable onPress={() => navigation.navigate('Signup')}>
             <Text center type="body1Regular" color="NEUTRAL_70">

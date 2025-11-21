@@ -5,6 +5,8 @@ import { StackScreenProps } from '@react-navigation/stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Icons, Images } from '@assets';
 import { ActionItem, ProfileUser, Text, View } from '@components';
+import { resetAuth } from '@store/slice/auth/authSlice';
+import { useAppDispatch } from '@storehooks';
 import { HotelStackParamList, HotelTabParamList } from '@type/navigation';
 import styles from './styles';
 
@@ -14,6 +16,12 @@ type Props = CompositeScreenProps<
 >;
 
 const HotelProfileScreen: React.FC<Props> = ({ navigation }) => {
+  const dispatch = useAppDispatch();
+
+  const handleLogout = () => {
+    dispatch(resetAuth());
+  };
+
   return (
     <SafeAreaView edges={['top']} style={styles.container}>
       <View paddingBottom={16}>
@@ -45,7 +53,7 @@ const HotelProfileScreen: React.FC<Props> = ({ navigation }) => {
         icon={<Icons.IcLogout />}
         label="Logout"
         tone="danger"
-        onPress={() => {}}
+        onPress={handleLogout}
       />
       <View height={1} backgroundColor="NEUTRAL_30" />
     </SafeAreaView>

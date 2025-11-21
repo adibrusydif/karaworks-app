@@ -10,8 +10,10 @@ import { createURL } from 'expo-linking';
 import * as SplashScreen from 'expo-splash-screen';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Provider } from 'react-redux';
 import Fonts from '@constants/Fonts';
 import RootNavigator from '@navigation/RootNavigator';
+import { store } from '@store/store';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -38,15 +40,17 @@ export function App() {
   }
 
   return (
-    <SafeAreaProvider>
-      <KeyboardProvider statusBarTranslucent>
-        <NavigationContainer
-          theme={theme}
-          linking={{ prefixes: [prefix] }}
-          onReady={() => SplashScreen.hideAsync()}>
-          <RootNavigator />
-        </NavigationContainer>
-      </KeyboardProvider>
-    </SafeAreaProvider>
+    <Provider store={store}>
+      <SafeAreaProvider>
+        <KeyboardProvider statusBarTranslucent>
+          <NavigationContainer
+            theme={theme}
+            linking={{ prefixes: [prefix] }}
+            onReady={() => SplashScreen.hideAsync()}>
+            <RootNavigator />
+          </NavigationContainer>
+        </KeyboardProvider>
+      </SafeAreaProvider>
+    </Provider>
   );
 }

@@ -5,13 +5,20 @@ import { Images } from '@assets';
 import { View, Text, Button } from '@components';
 import { shadowTypes } from '@constants';
 import { useInset } from '@hooks';
+import { setAuth } from '@store/slice/auth/authSlice';
+import { useAppDispatch } from '@storehooks';
 import { AuthStackParamList } from '@type/navigation';
 import styles from './styles';
 
 type Props = StackScreenProps<AuthStackParamList, 'SuccessOtp'>;
 
-const SuccessOTPScreen = ({ navigation }: Props) => {
+const SuccessOTPScreen: React.FC<Props> = () => {
+  const dispatch = useAppDispatch();
   const { paddingBottom } = useInset();
+
+  const startExplore = () => {
+    dispatch(setAuth({ token: 'token', role: 'worker' }));
+  };
 
   return (
     <View flex={1}>
@@ -29,10 +36,7 @@ const SuccessOTPScreen = ({ navigation }: Props) => {
       <View
         style={[styles.footer, shadowTypes.shadow_3]}
         paddingBottom={paddingBottom}>
-        <Button
-          label="Start Exploring"
-          onPress={() => navigation.navigate('SuccessOtp')}
-        />
+        <Button label="Start Exploring" onPress={startExplore} />
       </View>
     </View>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from '@components';
+import { View, Text } from '@components/atoms';
 import { Colors, Statuses } from '@constants';
 import { Status } from '@type/models/common';
 import styles from './styles';

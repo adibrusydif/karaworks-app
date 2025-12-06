@@ -1,4 +1,4 @@
-import { ApiResponse } from '../models/common';
+import { ApiResponse } from './common';
 import { User } from '../models/user';
 
 // Request payloads

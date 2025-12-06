@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, ImageSourcePropType } from 'react-native';
-import { View, Text, Button } from '@components';
+import { View, Text, Button } from '@components/atoms';
 import styles from './styles';
 
 interface ProfileUserProps {

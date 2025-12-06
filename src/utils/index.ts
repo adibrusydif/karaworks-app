@@ -1,4 +1,10 @@
-import { Dimensions, PixelRatio } from 'react-native';
+import {
+  Alert,
+  Dimensions,
+  PixelRatio,
+  Platform,
+  ToastAndroid,
+} from 'react-native';
 
 export const { width: deviceWidth, height: deviceHeight } =
   Dimensions.get('window');
@@ -18,4 +24,16 @@ export const formatCurrency = (amount: number, withoutRp?: boolean) => {
     /\B(?=(\d{3})+(?!\d))/g,
     '.',
   )}`;
+};
+
+export const showToastNative = (message: string) => {
+  if (Platform.OS === 'ios' || Platform.OS === 'windows') {
+    Alert.alert('Pet Owner', message);
+  } else {
+    ToastAndroid.showWithGravity(
+      message,
+      ToastAndroid.SHORT,
+      ToastAndroid.BOTTOM,
+    );
+  }
 };

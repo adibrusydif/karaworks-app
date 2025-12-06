@@ -1,11 +1,21 @@
-import React from 'react';
-import { FlatList, Image, StatusBar } from 'react-native';
+import React, { useEffect } from 'react';
+import {
+  ActivityIndicator,
+  FlatList,
+  Image,
+  ListRenderItem,
+  StatusBar,
+} from 'react-native';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { CompositeScreenProps } from '@react-navigation/native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { Icons, Images } from '@assets';
 import { View, Text, Button, EventCard, HeaderHome } from '@components';
+import { Colors } from '@constants';
 import { useInset } from '@hooks';
+import { getEvents } from '@store/slice/event/eventListSlice';
+import { useAppDispatch, useAppSelector } from '@storehooks';
+import { Event } from '@type/models/event';
 import { WorkerStackParamList, WorkerTabParamList } from '@type/navigation';
 import { scale } from '@utils';
 import styles from './styles';
@@ -17,10 +27,38 @@ type Props = CompositeScreenProps<
 
 const WorkerExploreScreen: React.FC<Props> = ({ navigation }) => {
   const { paddingTop } = useInset();
+  const dispatch = useAppDispatch();
+  const { data, isLoading } = useAppSelector((state) => state.events);
 
-  const renderItem = () => {
+  useEffect(() => {
+    dispatch(getEvents());
+  }, []);
+
+  const renderItem: ListRenderItem<Event> = ({ item }) => {
     return (
-      <EventCard onPress={() => navigation.navigate('WorkerEventDetail')} />
+      <EventCard
+        event={item}
+        showIconSalary={true}
+        onPress={() => navigation.navigate('WorkerEventDetail')}
+      />
+    );
+  };
+
+  const renderEmptyList = () => {
+    if (isLoading) {
+      return (
+        <View style={styles.containerList} justifyContent="center">
+          <ActivityIndicator color={Colors.PRIMARY_MAIN} />
+        </View>
+      );
+    }
+
+    return (
+      <View flex={1} justifyContent="center" alignItems="center">
+        <Text type="subtitle2Regular" color="NEUTRAL_50">
+          No events found
+        </Text>
+      </View>
     );
   };
 
@@ -54,10 +92,16 @@ const WorkerExploreScreen: React.FC<Props> = ({ navigation }) => {
         </View>
 
         <FlatList
-          data={[0, 1, 2]}
+          data={data}
           renderItem={renderItem}
-          keyExtractor={(item) => item.toString()}
+          keyExtractor={(item) => item.event_id}
           contentContainerStyle={styles.containerList}
+          showsVerticalScrollIndicator={false}
+          ListEmptyComponent={renderEmptyList}
+          initialNumToRender={10}
+          maxToRenderPerBatch={10}
+          onRefresh={() => dispatch(getEvents())}
+          refreshing={isLoading}
         />
       </View>
 

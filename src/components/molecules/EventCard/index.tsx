@@ -1,34 +1,47 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { Image, Pressable } from 'react-native';
-import { Images } from '@assets';
+import { Icons } from '@assets';
 import { Text, View } from '@components/atoms';
+import { Event } from '@type/models/event';
+import { formatCurrency } from '@utils';
+import { convertDate } from '@utils/dates';
 import styles from './styles';
 
 interface EventCardProps {
+  event: Event;
   onPress?: () => void;
+  showIconSalary?: boolean;
+  showSalary?: boolean;
 }
 
-const EventCard: React.FC<EventCardProps> = ({ onPress }) => {
-  const imageSource = useMemo(
-    () => (Math.random() < 0.5 ? Images.dummyEvent1 : Images.dummyEvent2),
-    [],
-  );
-
+const EventCard: React.FC<EventCardProps> = ({
+  event,
+  onPress,
+  showIconSalary,
+  showSalary = true,
+}) => {
   return (
     <Pressable style={styles.container} onPress={onPress}>
-      <Image source={imageSource} style={styles.image} resizeMode="contain" />
-      <View flex={1} row justifyContent="space-between">
-        <View gap={4}>
-          <Text type="body2Medium">Event Workshops</Text>
+      <Image source={{ uri: event?.event_photo }} style={styles.image} />
+      <View flex={1}>
+        <View flex={1} gap={4}>
+          <Text type="body2Medium">{event?.event_name ?? '-'}</Text>
           <Text type="captionRegular" color="NEUTRAL_70">
-            31 Oct 2025, 20:00 WIB
+            {convertDate(event?.event_date, 'DD MMM YYYY, HH:mm WIB')}
           </Text>
         </View>
         <View justifyContent="flex-end" alignItems="flex-end">
           <Text type="captionRegular" color="NEUTRAL_70">
-            5 Applicants
+            {`${event?.event_person_count ?? 0} Applicants`}
           </Text>
-          <Text type="body2Medium">Rp400.000</Text>
+          {showSalary && (
+            <View row gap={8} alignItems="center">
+              {showIconSalary && <Icons.IcMoney />}
+              <Text type="body2Medium">
+                {formatCurrency(event?.event_salary ?? 0)}
+              </Text>
+            </View>
+          )}
         </View>
       </View>
     </Pressable>

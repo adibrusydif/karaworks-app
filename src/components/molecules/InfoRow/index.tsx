@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from '@components';
+import { Text, View } from '@components/atoms';
 
 interface InfoRowProps {
   icon: React.ReactNode;

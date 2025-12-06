@@ -1,0 +1,31 @@
+import { Hotel } from './hotel';
+
+export type Event = {
+  event_id: string;
+  event_creator_id: string;
+  event_name: string;
+  event_photo: string;
+  event_description: string;
+  event_date: string;
+  event_salary: number;
+  event_person_count: number;
+  event_status: string;
+  created_at: string;
+  updated_at: string;
+  event_creator: EventCreator;
+};
+
+export type EventCreator = {
+  hotel: Hotel;
+  bank_id: string;
+  user_id: string;
+  hotel_id: string;
+  user_name: string;
+  user_role: string;
+  created_at: string;
+  updated_at: string;
+  user_phone: string;
+  user_photo: string;
+  bank_account_id: string;
+  bank_account_name: string;
+};

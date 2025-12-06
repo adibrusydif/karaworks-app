@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Pressable } from 'react-native';
-import { View, Text } from '@components';
+import { View, Text } from '@components/atoms';
 import { TabItem } from '@type/models/common';
 import styles from './styles';
 

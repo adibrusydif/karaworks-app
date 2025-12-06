@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, StatusBar } from 'react-native';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { CompositeScreenProps } from '@react-navigation/native';
@@ -14,6 +14,8 @@ import { Images } from '@assets';
 import { View, FloatingButton, HeaderHome } from '@components';
 import { Colors } from '@constants';
 import { useInset } from '@hooks';
+import { useAppDispatch } from '@store/hooks';
+import { getEvents } from '@store/slice/event/eventListSlice';
 import { HotelStackParamList, HotelTabParamList } from '@type/navigation';
 import { deviceWidth } from '@utils';
 import TabListEvent from './components/TabListEvent';
@@ -38,8 +40,13 @@ const renderScene = SceneMap({
 
 const HotelEventScreen: React.FC<Props> = ({ navigation }) => {
   const { paddingTop } = useInset();
+  const dispatch = useAppDispatch();
 
   const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    dispatch(getEvents());
+  }, []);
 
   const renderTabBar = (props: TabBarProps<Route>) => {
     return (

@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  containerlist: {
+  containerList: {
     gap: 8,
     paddingTop: 16,
     paddingBottom: 64,

@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { EventApi } from '@api/endpoints/event';
 import { handleAxiosError } from '@api/errorHandler';
 import { Event } from '@type/models/event';
-import { BaseStateProps } from '@type/models/state';
+import { BaseSliceProps } from '@type/models/state';
 
 export const getEvents = createAsyncThunk(
   'event/fetch-list-event',
@@ -16,7 +16,11 @@ export const getEvents = createAsyncThunk(
   },
 );
 
-const initialState: BaseStateProps<Event[]> = {
+interface EventListState extends BaseSliceProps {
+  data: Event[];
+}
+
+const initialState: EventListState = {
   data: [],
   isLoading: false,
   isError: false,

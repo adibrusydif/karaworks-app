@@ -1,6 +1,7 @@
 import api from '@api/client';
 import { API_URL } from '@constants/Endpoints';
+import { EventListResponse } from '@type/api/event';
 
 export const EventApi = {
-  getEvents: () => api.get(API_URL.events),
+  getEvents: (): Promise<EventListResponse> => api.get(API_URL.events),
 };

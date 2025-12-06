@@ -1,65 +1,113 @@
-# Starter Template with React Navigation
+# Karaworks Mobile
 
-This is a minimal starter template for React Native apps using Expo and React Navigation.
+A React Native app built with Expo, React Navigation, and Bun. The project uses a modular structure with typed APIs, reusable UI components, and alias-based imports.
 
-It includes the following:
+## Tech Stack
 
-- Example [Native Stack](https://reactnavigation.org/docs/native-stack-navigator) with a nested [Bottom Tab](https://reactnavigation.org/docs/bottom-tab-navigator)
-- Web support with [React Native for Web](https://necolas.github.io/react-native-web/)
-- TypeScript support and configured for React Navigation
-- Automatic [deep link](https://reactnavigation.org/docs/deep-linking) and [URL handling configuration](https://reactnavigation.org/docs/configuring-links)
-- Theme support [based on system appearance](https://reactnavigation.org/docs/themes/#using-the-operating-system-preferences)
-- Expo [Development Build](https://docs.expo.dev/develop/development-builds/introduction/) with [Continuous Native Generation](https://docs.expo.dev/workflow/continuous-native-generation/)
+- Expo SDK 54
+- React Native 0.81
+- React Navigation (Stack + Bottom Tabs)
+- TypeScript
+- Bun (package manager & scripts)
+- ESLint + Prettier
 
-## Getting Started
+## Project Structure
 
-1. Create a new project using this template:
+```
+karaworks
+├── src
+│   ├── api
+│   │   ├── endpoints
+│   │   ├── client.ts
+│   │   └── errorHandler.ts
+│   ├── assets
+│   │   ├── fonts
+│   │   ├── icons
+│   │   ├── images
+│   │   └── index.ts
+│   ├── components
+│   │   ├── atoms
+│   │   ├── molecules
+│   │   └── index.ts
+│   ├── constants
+│   │   ├── Colors/
+│   │   ├── Const/
+│   │   ├── Endpoints/
+│   │   ├── Fonts/
+│   │   ├── Styles/
+│   │   ├── Typography/
+│   │   └── index.ts
+│   ├── hooks
+│   │   └── index.ts
+│   ├── navigation
+│   │   ├── tab/
+│   │   │   ├── BottomTab.tsx
+│   │   │   ├── HotelTabNavigator.tsx
+│   │   │   └── WorkerTabNavigator.tsx
+│   │   ├── AuthNavigator.tsx
+│   │   ├── HotelNavigator.tsx
+│   │   ├── RootNavigator.tsx
+│   │   └── WorkerNavigator.tsx
+│   ├── screens
+│   │   ├── auth/
+│   │   ├── hotel/
+│   │   ├── worker/
+│   │   ├── shared/
+│   │   └── index.ts
+│   ├── store
+│   │   ├── slice/
+│   │   ├── hooks.ts
+│   │   └── store.ts
+│   ├── type
+│   │   ├── api/
+│   │   ├── models/
+│   │   ├── navigation.ts
+│   │   └── types.d.ts
+│   ├── utils
+│   └── App.tsx
+├── babel.config.js
+├── package.json
+├── README.md
+└── .eslintrc.js
+```
 
-   ```sh
-   npx create-expo-app@latest --template react-navigation/template
-   ```
+## Aliases
 
-2. Edit the `app.json` file to configure the `name`, `slug`, `scheme` and bundle identifiers (`ios.bundleIdentifier` and `android.bundleIdentifier`) for your app.
+Configured via `babel.config.js`:
 
-3. Edit the `src/App.tsx` file to start working on your app.
+- `@api`, `@assets`, `@components`, `@constants`, `@hooks`, `@navigation`, `@screens`, `@store`, `@slice`, `@type`, `@utils`.
 
-## Running the app
+## Scripts (Bun)
 
-- Install the dependencies:
+- `bun install` — Install dependencies.
+- `bun start` — Start Expo dev server.
+- `bun run lint` — Lint codebase.
+- `bun run lint:fix` — Autofix lint issues.
 
-  ```sh
-  npm install
-  ```
+If you prefer npm, equivalent scripts exist in `package.json`.
 
-- Start the development server:
+## Conventions
 
-  ```sh
-  npm start
-  ```
+- Colors follow UPPER_SNAKE_CASE keys; fonts and typography live under `src/constants`.
+- Global constants use PascalCase object names with UPPER_SNAKE_CASE keys, e.g. `Statuses.POSTED`.
+- UI components should be placed in `atoms` or `molecules` depending on complexity.
 
-- Build and run iOS and Android development builds:
+## Running
 
-  ```sh
-  npm run ios
-  # or
-  npm run android
-  ```
+```sh
+bun install
+bun start
+press s switch to Expo Go / Development Build
+```
 
-- In the terminal running the development server, press `i` to open the iOS simulator, `a` to open the Android device or emulator, or `w` to open the web browser.
+## Linting
 
-## Notes
-
-This project uses a [development build](https://docs.expo.dev/develop/development-builds/introduction/) and cannot be run with [Expo Go](https://expo.dev/go). To run the app with Expo Go, edit the `package.json` file, remove the `expo-dev-client` package and `--dev-client` flag from the `start` script.
-
-We highly recommend using the development builds for normal development and testing.
-
-The `ios` and `android` folder are gitignored in the project by default as they are automatically generated during the build process ([Continuous Native Generation](https://docs.expo.dev/workflow/continuous-native-generation/)). This means that you should not edit these folders directly and use [config plugins](https://docs.expo.dev/config-plugins/) instead. However, if you need to edit these folders, you can remove them from the `.gitignore` file so that they are tracked by git.
+```sh
+bun run lint
+bun run lint:fix
+```
 
 ## Resources
 
-- [React Navigation documentation](https://reactnavigation.org/)
-- [Expo documentation](https://docs.expo.dev/)
-
----
-
-Demo assets are from [lucide.dev](https://lucide.dev/)
+- React Navigation: https://reactnavigation.org/
+- Expo: https://docs.expo.dev/

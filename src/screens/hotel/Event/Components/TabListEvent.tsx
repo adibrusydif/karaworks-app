@@ -3,19 +3,20 @@ import { ActivityIndicator, FlatList } from 'react-native';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { View, EventCard, Text } from '@components';
 import { Colors } from '@constants';
-import { useAppDispatch, useAppSelector } from '@store/hooks';
-import { getEvents } from '@store/slice/event/eventListSlice';
 import { Event } from '@type/models/event';
 import { HotelStackParamList } from '@type/navigation';
 import styles from './styles';
 
 type NavProps = NavigationProp<HotelStackParamList>;
 
-const TabListEvent = () => {
-  const navigation = useNavigation<NavProps>();
-  const { data, isLoading } = useAppSelector((state) => state.events);
+interface Props {
+  data: Event[];
+  isLoading: boolean;
+  onRefresh: () => void;
+}
 
-  const dispatch = useAppDispatch();
+const TabListEvent: React.FC<Props> = ({ data, isLoading, onRefresh }) => {
+  const navigation = useNavigation<NavProps>();
 
   const renderItem = ({ item }: { item: Event }) => (
     <EventCard
@@ -44,20 +45,18 @@ const TabListEvent = () => {
   };
 
   return (
-    <View>
-      <FlatList
-        data={data}
-        renderItem={renderItem}
-        showsVerticalScrollIndicator={false}
-        keyExtractor={(item) => item.event_id}
-        contentContainerStyle={styles.containerList}
-        ListEmptyComponent={renderEmptyList}
-        initialNumToRender={10}
-        maxToRenderPerBatch={10}
-        onRefresh={() => dispatch(getEvents())}
-        refreshing={isLoading}
-      />
-    </View>
+    <FlatList
+      data={data}
+      renderItem={renderItem}
+      showsVerticalScrollIndicator={false}
+      keyExtractor={(item) => item.event_id}
+      contentContainerStyle={styles.containerList}
+      ListEmptyComponent={renderEmptyList}
+      initialNumToRender={10}
+      maxToRenderPerBatch={10}
+      onRefresh={onRefresh}
+      refreshing={isLoading}
+    />
   );
 };
 

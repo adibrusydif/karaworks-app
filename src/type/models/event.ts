@@ -1,5 +1,7 @@
 import { Hotel } from './hotel';
 
+export type EventStatus = 'posted' | 'ongoing' | 'finished';
+
 export type Event = {
   event_id: string;
   event_creator_id: string;

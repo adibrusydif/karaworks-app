@@ -3,19 +3,13 @@ import { Image, StatusBar } from 'react-native';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { CompositeScreenProps } from '@react-navigation/native';
 import { StackScreenProps } from '@react-navigation/stack';
-import {
-  Route,
-  SceneMap,
-  TabBar,
-  TabBarProps,
-  TabView,
-} from 'react-native-tab-view';
+import { Route, TabBar, TabBarProps, TabView } from 'react-native-tab-view';
 import { Images } from '@assets';
 import { View, FloatingButton, HeaderHome } from '@components';
 import { Colors } from '@constants';
 import { useInset } from '@hooks';
-import { useAppDispatch } from '@store/hooks';
-import { getEvents } from '@store/slice/event/eventListSlice';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { getEventsByStatus } from '@store/slice/event/eventListByStatusSlice';
 import { HotelStackParamList, HotelTabParamList } from '@type/navigation';
 import { deviceWidth } from '@utils';
 import TabListEvent from './components/TabListEvent';
@@ -32,21 +26,71 @@ const routes = [
   { key: 'finished', title: 'Finished' },
 ];
 
-const renderScene = SceneMap({
-  posted: () => <TabListEvent />,
-  ongoing: () => <TabListEvent />,
-  finished: () => <TabListEvent />,
-});
-
 const HotelEventScreen: React.FC<Props> = ({ navigation }) => {
   const { paddingTop } = useInset();
   const dispatch = useAppDispatch();
+  const { data: postedData, isLoading } = useAppSelector(
+    (state) => state.eventsByStatus.posted,
+  );
+  const { data: ongoingData, isLoading: ongoingIsLoading } = useAppSelector(
+    (state) => state.eventsByStatus.ongoing,
+  );
+  const { data: finishedData, isLoading: finishedIsLoading } = useAppSelector(
+    (state) => state.eventsByStatus.finished,
+  );
 
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    dispatch(getEvents());
+    dispatch(getEventsByStatus('posted'));
+    dispatch(getEventsByStatus('ongoing'));
+    dispatch(getEventsByStatus('finished'));
   }, []);
+
+  const handleRefresh = (key: string) => {
+    switch (key) {
+      case 'posted':
+        dispatch(getEventsByStatus('posted'));
+        break;
+      case 'ongoing':
+        dispatch(getEventsByStatus('ongoing'));
+        break;
+      case 'finished':
+        dispatch(getEventsByStatus('finished'));
+        break;
+    }
+  };
+
+  const renderScene = ({ route: tabRoute }: { route: Route }) => {
+    switch (tabRoute.key) {
+      case 'posted':
+        return (
+          <TabListEvent
+            data={postedData}
+            isLoading={isLoading}
+            onRefresh={() => handleRefresh('posted')}
+          />
+        );
+      case 'ongoing':
+        return (
+          <TabListEvent
+            data={ongoingData}
+            isLoading={ongoingIsLoading}
+            onRefresh={() => handleRefresh('ongoing')}
+          />
+        );
+      case 'finished':
+        return (
+          <TabListEvent
+            data={finishedData}
+            isLoading={finishedIsLoading}
+            onRefresh={() => handleRefresh('finished')}
+          />
+        );
+      default:
+        return null;
+    }
+  };
 
   const renderTabBar = (props: TabBarProps<Route>) => {
     return (

@@ -4,7 +4,9 @@ export const API_CORE = 'https://api.karaworks.app';
 
 // ENDPOINTS
 export const API_URL = {
-  applications: 'api/applications',
-  events: 'api/events',
-  users: 'api/users',
+  APPLICATIONS: 'api/applications',
+  APPLICATIONS_EVENT: 'api/applications/event',
+  EVENTS: 'api/events',
+  EVENTS_STATUS: 'api/events/status',
+  USERS: 'api/users',
 };

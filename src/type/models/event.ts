@@ -11,7 +11,7 @@ export type Event = {
   event_date: string;
   event_salary: number;
   event_person_count: number;
-  event_status: string;
+  event_status: EventStatus;
   created_at: string;
   updated_at: string;
   event_creator: EventCreator;

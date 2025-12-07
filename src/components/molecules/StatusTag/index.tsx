@@ -1,15 +1,15 @@
 import React from 'react';
 import { View, Text } from '@components/atoms';
 import { Colors, Statuses } from '@constants';
-import { Status } from '@type/models/common';
+import { EventStatus } from '@type/models/common';
 import styles from './styles';
 
 interface StatusTagProps {
-  status?: Status;
+  status?: EventStatus;
 }
 
 const StatusTag: React.FC<StatusTagProps> = ({ status = 'posted' }) => {
-  const getStatusColor = (value: Status) => {
+  const getStatusColor = (value: EventStatus) => {
     switch (value) {
       case Statuses.POSTED:
         return {

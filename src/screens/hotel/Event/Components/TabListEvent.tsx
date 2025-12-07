@@ -22,7 +22,7 @@ const TabListEvent: React.FC<Props> = ({ data, isLoading, onRefresh }) => {
     <EventCard
       event={item}
       showSalary={false}
-      onPress={() => navigation.navigate('HotelEventDetail')}
+      onPress={() => navigation.navigate('HotelEventDetail', { event: item })}
     />
   );
 

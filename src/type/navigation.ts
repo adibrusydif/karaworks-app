@@ -1,3 +1,5 @@
+import { Event } from './models/event';
+
 // Root stack
 export type RootStackParamList = {
   Auth: undefined;
@@ -22,7 +24,7 @@ export type HotelStackParamList = {
   HotelTabs: undefined;
   HotelCreateEvent: undefined;
   HotelSuccessCreateEvent: undefined;
-  HotelEventDetail: undefined;
+  HotelEventDetail: { event: Event };
   HotelBillDetail: undefined;
   EditProfile: undefined;
 };

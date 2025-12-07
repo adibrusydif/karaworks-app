@@ -1,12 +1,22 @@
 import React from 'react';
 import { Image, Pressable } from 'react-native';
-import { Icons, Images } from '@assets';
+import { Icons } from '@assets';
 import { View, Text, Button } from '@components';
+import { Application } from '@type/models/application';
 import { formatCurrency } from '@utils';
 import styles from './styles';
 import UserTime from './UserTime';
 
-const UserItem = () => {
+interface UserItemProps {
+  item: Application;
+  onApprove?: () => void;
+  onRemove?: () => void;
+}
+
+const UserItem: React.FC<UserItemProps> = ({ item, onApprove, onRemove }) => {
+  const user = item.user;
+  const event = item.event;
+
   const isApprove = true;
   const isRemove = true;
 
@@ -20,6 +30,7 @@ const UserItem = () => {
           buttonColor="#EEF9FF"
           style={styles.actionButton}
           elevation={false}
+          onPress={onApprove}
         />
       );
     }
@@ -33,6 +44,7 @@ const UserItem = () => {
           buttonColor="DANGER_MAIN"
           style={styles.actionButton}
           elevation={false}
+          onPress={onRemove}
         />
       );
     }
@@ -44,8 +56,8 @@ const UserItem = () => {
     <View style={styles.userItemContainer}>
       <View row justifyContent="space-between">
         <View row alignItems="center" gap={8}>
-          <Image source={Images.dummyUser2} style={styles.userImage} />
-          <Text type="body2Medium">Ari Kurniawan</Text>
+          <Image source={{ uri: user.user_photo }} style={styles.userImage} />
+          <Text type="body2Medium">{user.user_name}</Text>
         </View>
         <View row alignItems="center" gap={12}>
           <Pressable style={styles.actionRow}>
@@ -59,9 +71,12 @@ const UserItem = () => {
       </View>
 
       <View row justifyContent="space-between">
-        <UserTime />
+        <UserTime
+          clockIn={item.clock_in_prove}
+          clockOut={item.clock_out_prove}
+        />
         <Text right type="body2SemiBold">
-          {formatCurrency(100000)}
+          {formatCurrency(event.event_salary)}
         </Text>
       </View>
     </View>

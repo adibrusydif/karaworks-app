@@ -1,22 +1,31 @@
 import React, { useState } from 'react';
 import { Image, Pressable } from 'react-native';
-import { Icons, Images } from '@assets';
+import { Icons } from '@assets';
 import { View, Text, StatusTag, InfoRow } from '@components';
+import { FormatDate } from '@constants';
+import { Event } from '@type/models/event';
+import { formatCurrency } from '@utils';
+import { convertDate } from '@utils/dates';
 import styles from './styles';
 
-const EventInfo = () => {
+interface EventInfoProps {
+  event: Event;
+}
+
+const EventInfo: React.FC<EventInfoProps> = ({ event }) => {
   const [isReadMore, setIsReadMore] = useState(false);
 
   return (
     <View gap={12}>
-      <StatusTag status="posted" />
+      <StatusTag status={event.event_status} />
       <View row gap={16}>
-        <Image source={Images.dummyEvent1} style={styles.eventImage} />
+        <Image source={{ uri: event.event_photo }} style={styles.eventImage} />
         <View flex={1} gap={4}>
-          <Text type="subtitle2Medium">Halloween Party</Text>
-          <Text style={styles.descEvent} numberOfLines={5}>
-            Lorem ipsum dolor sit amet consectetur. Potenti faucibus integer
-            cursus morbi donec. Sed dui eros tincidunt tortor enim curabitur
+          <Text type="subtitle2Medium">{event.event_name}</Text>
+          <Text
+            style={styles.descEvent}
+            numberOfLines={!isReadMore ? 5 : undefined}>
+            {event.event_description}
           </Text>
           <Pressable onPress={() => setIsReadMore(!isReadMore)}>
             <Text type="body2SemiBold">
@@ -26,10 +35,19 @@ const EventInfo = () => {
         </View>
       </View>
       <View row gap={12}>
-        <InfoRow icon={<Icons.IcMoney />} label="Rp100.000" />
-        <InfoRow icon={<Icons.IcPeople />} label="5 Workers" />
+        <InfoRow
+          icon={<Icons.IcMoney />}
+          label={formatCurrency(event.event_salary)}
+        />
+        <InfoRow
+          icon={<Icons.IcPeople />}
+          label={`${event.event_person_count} Workers`}
+        />
       </View>
-      <InfoRow icon={<Icons.IcCalendar />} label="31 October 2025, 20:00 WIB" />
+      <InfoRow
+        icon={<Icons.IcCalendar />}
+        label={convertDate(event?.event_date, FormatDate.FULL)}
+      />
     </View>
   );
 };

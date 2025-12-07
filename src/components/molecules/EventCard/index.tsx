@@ -2,6 +2,7 @@ import React from 'react';
 import { Image, Pressable } from 'react-native';
 import { Icons } from '@assets';
 import { Text, View } from '@components/atoms';
+import { FormatDate } from '@constants';
 import { Event } from '@type/models/event';
 import { formatCurrency } from '@utils';
 import { convertDate } from '@utils/dates';
@@ -27,7 +28,7 @@ const EventCard: React.FC<EventCardProps> = ({
         <View flex={1} gap={4}>
           <Text type="body2Medium">{event?.event_name ?? '-'}</Text>
           <Text type="captionRegular" color="NEUTRAL_70">
-            {convertDate(event?.event_date, 'DD MMM YYYY, HH:mm WIB')}
+            {convertDate(event?.event_date, FormatDate.FULL)}
           </Text>
         </View>
         <View justifyContent="flex-end" alignItems="flex-end">

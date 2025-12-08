@@ -12,7 +12,7 @@ import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { getEventsByStatus } from '@store/slice/event/eventListByStatusSlice';
 import { HotelStackParamList, HotelTabParamList } from '@type/navigation';
 import { deviceWidth } from '@utils';
-import TabListEvent from './componentss/TabListEvent';
+import TabListEvent from './components/TabListEvent';
 import styles from './styles';
 
 type Props = CompositeScreenProps<

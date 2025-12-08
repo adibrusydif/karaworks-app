@@ -39,7 +39,9 @@ const WorkerExploreScreen: React.FC<Props> = ({ navigation }) => {
       <EventCard
         event={item}
         showIconSalary={true}
-        onPress={() => navigation.navigate('WorkerEventDetail')}
+        onPress={() =>
+          navigation.navigate('WorkerEventDetail', { event: item })
+        }
       />
     );
   };

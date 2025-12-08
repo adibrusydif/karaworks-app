@@ -1,7 +1,9 @@
 import React from 'react';
-import { Image, Pressable } from 'react-native';
+import { Pressable } from 'react-native';
+import { Image } from 'expo-image';
 import { Icons } from '@assets';
 import { View, Text, Button } from '@components';
+import { Blurhash } from '@constants';
 import { Application } from '@type/models/application';
 import { formatCurrency } from '@utils';
 import styles from './styles';
@@ -56,7 +58,12 @@ const UserItem: React.FC<UserItemProps> = ({ item, onApprove, onRemove }) => {
     <View style={styles.userItemContainer}>
       <View row justifyContent="space-between">
         <View row alignItems="center" gap={8}>
-          <Image source={{ uri: user.user_photo }} style={styles.userImage} />
+          <Image
+            source={{ uri: user.user_photo }}
+            placeholder={{ blurhash: Blurhash }}
+            style={styles.userImage}
+            transition={1000}
+          />
           <Text type="body2Medium">{user.user_name}</Text>
         </View>
         <View row alignItems="center" gap={12}>

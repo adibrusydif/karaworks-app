@@ -22,7 +22,7 @@ const EventInfo: React.FC<EventInfoProps> = ({ event }) => {
       <View row gap={16}>
         <Image
           source={{ uri: event.event_photo }}
-          placeholder={Blurhash}
+          placeholder={{ blurhash: Blurhash }}
           style={styles.eventImage}
           transition={1000}
         />

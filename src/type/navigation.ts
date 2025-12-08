@@ -40,7 +40,7 @@ export type HotelTabParamList = {
 // ======================
 export type WorkerStackParamList = {
   WorkerTabs: undefined;
-  WorkerEventDetail: undefined;
+  WorkerEventDetail: { event: Event };
   EditProfile: undefined;
   WorkerEditBank: undefined;
   WorkerWallet: undefined;

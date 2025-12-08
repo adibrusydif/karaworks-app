@@ -1,17 +1,22 @@
 import React from 'react';
-import { Image, ScrollView } from 'react-native';
+import { ScrollView } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
-import { Icons, Images } from '@assets';
+import { Image } from 'expo-image';
+import { Icons } from '@assets';
 import { View, Header, StatusTag, Button, Text, InfoRow } from '@components';
-import { shadowTypes } from '@constants';
+import { Blurhash, FormatDate, shadowTypes } from '@constants';
 import { useInset } from '@hooks';
 import { WorkerStackParamList } from '@type/navigation';
+import { formatCurrency } from '@utils';
+import { convertDate } from '@utils/dates';
 import styles from './styles';
 
 type Props = StackScreenProps<WorkerStackParamList, 'WorkerEventDetail'>;
 
-const WorkerEventDetail: React.FC<Props> = ({ navigation }) => {
+const WorkerEventDetail: React.FC<Props> = ({ navigation, route }) => {
   const { paddingBottom } = useInset();
+  const { event } = route.params;
+  const hotel = event.event_creator.hotel;
 
   const status = '';
   const showWorkerTime = false;
@@ -54,32 +59,47 @@ const WorkerEventDetail: React.FC<Props> = ({ navigation }) => {
       <ScrollView>
         <View flex={1} padding={16} gap={12}>
           {status && <StatusTag status="applied" />}
-          <Image source={Images.dummyEvent1} style={styles.eventImage} />
+          <Image
+            source={{ uri: event.event_photo }}
+            style={styles.eventImage}
+            placeholder={{ blurhash: Blurhash }}
+            transition={1000}
+          />
           <View gap={4}>
-            <Text type="subtitle2Medium">Halloween Party</Text>
+            <Text type="subtitle2Medium">{event.event_name}</Text>
             <Text type="body2Regular" color="NEUTRAL_70" lineHeight={18}>
-              Lorem ipsum dolor sit amet consectetur. Potenti faucibus integer
-              cursus morbi donec. Sed dui eros tincidunt tortor enim curabitur
+              {event.event_description}
             </Text>
           </View>
           <View row alignItems="center" gap={8}>
             <Image
-              source={Images.dummyHotelProfile}
+              source={{ uri: hotel.hotel_logo }}
               style={styles.hotelImage}
+              placeholder={{ blurhash: Blurhash }}
+              transition={1000}
             />
-            <Text type="body2Medium">Hotel ABC</Text>
+            <Text type="body2Medium">{hotel.hotel_name}</Text>
           </View>
           <View row gap={12}>
-            <InfoRow icon={<Icons.IcMoney />} label="Rp100.000" />
-            <InfoRow icon={<Icons.IcPeople />} label="5 Workers" />
+            <InfoRow
+              icon={<Icons.IcMoney />}
+              label={formatCurrency(event.event_salary)}
+            />
+            <InfoRow
+              icon={<Icons.IcPeople />}
+              label={`${event.event_person_count} Workers`}
+            />
           </View>
           <InfoRow
             icon={<Icons.IcCalendar />}
-            label="31 October 2025, 20:00 WIB"
+            label={convertDate(event.event_date, FormatDate.FULL)}
           />
 
           <View paddingTop={12} gap={4}>
-            <Text type="body2Regular">Applied On 1 November 2025</Text>
+            {status && (
+              <Text type="body2Regular">Applied On 1 November 2025</Text>
+            )}
+
             {renderWorkerTime()}
           </View>
         </View>

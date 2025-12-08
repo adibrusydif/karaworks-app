@@ -26,7 +26,7 @@ const EventCard: React.FC<EventCardProps> = ({
     <Pressable style={styles.container} onPress={onPress}>
       <Image
         source={{ uri: event?.event_photo }}
-        placeholder={Blurhash}
+        placeholder={{ blurhash: Blurhash }}
         style={styles.image}
         transition={1000}
       />

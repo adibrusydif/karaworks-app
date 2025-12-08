@@ -9,5 +9,4 @@ export const FormatDate = {
   FULL: 'DD MMM YYYY, HH:mm WIB',
 } as const;
 
-export const Blurhash =
-  '|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[';
+export const Blurhash = 'L6PZfSi_.AyE_3t7t7R**0o#DgR4';

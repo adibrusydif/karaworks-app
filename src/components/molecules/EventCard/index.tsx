@@ -1,8 +1,9 @@
 import React from 'react';
-import { Image, Pressable } from 'react-native';
+import { Pressable } from 'react-native';
+import { Image } from 'expo-image';
 import { Icons } from '@assets';
 import { Text, View } from '@components/atoms';
-import { FormatDate } from '@constants';
+import { Blurhash, FormatDate } from '@constants';
 import { Event } from '@type/models/event';
 import { formatCurrency } from '@utils';
 import { convertDate } from '@utils/dates';
@@ -23,7 +24,12 @@ const EventCard: React.FC<EventCardProps> = ({
 }) => {
   return (
     <Pressable style={styles.container} onPress={onPress}>
-      <Image source={{ uri: event?.event_photo }} style={styles.image} />
+      <Image
+        source={{ uri: event?.event_photo }}
+        placeholder={Blurhash}
+        style={styles.image}
+        transition={1000}
+      />
       <View flex={1}>
         <View flex={1} gap={4}>
           <Text type="body2Medium">{event?.event_name ?? '-'}</Text>

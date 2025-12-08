@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Image, Pressable } from 'react-native';
+import { Pressable } from 'react-native';
+import { Image } from 'expo-image';
 import { Icons } from '@assets';
 import { View, Text, StatusTag, InfoRow } from '@components';
-import { FormatDate } from '@constants';
+import { Blurhash, FormatDate } from '@constants';
 import { Event } from '@type/models/event';
 import { formatCurrency } from '@utils';
 import { convertDate } from '@utils/dates';
@@ -19,7 +20,12 @@ const EventInfo: React.FC<EventInfoProps> = ({ event }) => {
     <View gap={12}>
       <StatusTag status={event.event_status} />
       <View row gap={16}>
-        <Image source={{ uri: event.event_photo }} style={styles.eventImage} />
+        <Image
+          source={{ uri: event.event_photo }}
+          placeholder={Blurhash}
+          style={styles.eventImage}
+          transition={1000}
+        />
         <View flex={1} gap={4}>
           <Text type="subtitle2Medium">{event.event_name}</Text>
           <Text

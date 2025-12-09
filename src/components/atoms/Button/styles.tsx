@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 6,
     backgroundColor: Colors.PRIMARY_MAIN,
+    borderWidth: 1,
   },
   elevation: {
     elevation: 2,

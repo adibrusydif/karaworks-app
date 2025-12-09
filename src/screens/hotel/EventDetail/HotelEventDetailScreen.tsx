@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, ScrollView } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
-import { View, Header, Text, Button, TabFilter } from '@components';
+import { View, Header, Text, Button, TabFilter, QRModal } from '@components';
 import { shadowTypes, Statuses } from '@constants';
 import { useInset } from '@hooks';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
@@ -29,6 +29,9 @@ const HotelEventDetailScreen: React.FC<Props> = ({ navigation, route }) => {
   const dispatch = useAppDispatch();
   const { data, isLoading } = useAppSelector((state) => state.applicationEvent);
 
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [titleQR, setTitleQR] = useState('QR Code Clock In');
+
   const showButtonQR = event.event_status !== Statuses.POSTED;
   const showButton = event.event_status !== Statuses.POSTED;
   const isFinished = event.event_status === Statuses.FINISHED;
@@ -41,6 +44,16 @@ const HotelEventDetailScreen: React.FC<Props> = ({ navigation, route }) => {
       dispatch(resetApplicationsEvent());
     };
   }, []);
+
+  const showQRClockIn = () => {
+    setTitleQR('QR Code Clock In');
+    setIsModalVisible(true);
+  };
+
+  const showQRClockOut = () => {
+    setTitleQR('QR Code Clock Out');
+    setIsModalVisible(true);
+  };
 
   return (
     <View flex={1}>
@@ -60,6 +73,7 @@ const HotelEventDetailScreen: React.FC<Props> = ({ navigation, route }) => {
                 buttonColor="SUCCESS_SURFACE"
                 style={styles.flex1}
                 elevation={false}
+                onPress={showQRClockIn}
               />
               <Button
                 label="Clock Out"
@@ -68,6 +82,7 @@ const HotelEventDetailScreen: React.FC<Props> = ({ navigation, route }) => {
                 buttonColor="DANGER_SURFACE"
                 style={styles.flex1}
                 elevation={false}
+                onPress={showQRClockOut}
               />
             </View>
           )}
@@ -102,6 +117,13 @@ const HotelEventDetailScreen: React.FC<Props> = ({ navigation, route }) => {
           <Button label={!isFinished ? 'Finish Event' : 'Download Bill'} />
         </View>
       )}
+
+      {/* QR Modal */}
+      <QRModal
+        title={titleQR}
+        visible={isModalVisible}
+        onClose={() => setIsModalVisible(false)}
+      />
     </View>
   );
 };

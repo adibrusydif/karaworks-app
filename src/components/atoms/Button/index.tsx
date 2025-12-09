@@ -13,6 +13,7 @@ interface ButtonProps extends TouchableOpacityProps {
   label: string;
   labelColor?: ColorType;
   buttonColor?: ColorType;
+  borderColor?: ColorType;
   isLoading?: boolean;
   height?: number;
   width?: number;
@@ -25,6 +26,7 @@ const Button: React.FC<ButtonProps> = ({
   label,
   labelColor = 'NEUTRAL_10',
   buttonColor = 'PRIMARY_MAIN',
+  borderColor = 'transparent',
   disabled,
   isLoading,
   height = 48,
@@ -44,6 +46,9 @@ const Button: React.FC<ButtonProps> = ({
           backgroundColor: disabled
             ? Colors.NEUTRAL_40
             : Colors[buttonColor as keyof typeof Colors] || buttonColor,
+          borderColor: disabled
+            ? Colors.NEUTRAL_40
+            : Colors[borderColor as keyof typeof Colors] || borderColor,
           height,
           width,
         },

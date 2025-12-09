@@ -5,5 +5,6 @@ export { default as HeaderHome } from './HeaderHome';
 export { default as InfoRow } from './InfoRow';
 export { default as ModalLoading } from './ModalLoading';
 export { default as ProfileUser } from './ProfileUser';
+export { default as QRModal } from './QRModal';
 export { default as StatusTag } from './StatusTag';
 export { default as TabFilter } from './TabFilter';

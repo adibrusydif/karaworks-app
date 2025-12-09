@@ -6,6 +6,7 @@ export const API_CORE = 'https://api.karaworks.app';
 export const API_URL = {
   APPLICATIONS: 'api/applications',
   APPLICATIONS_EVENT: 'api/applications/event',
+  BANKS: 'api/banks',
   EVENTS: 'api/events',
   EVENTS_STATUS: 'api/events/status',
   USERS: 'api/users',

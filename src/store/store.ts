@@ -1,17 +1,19 @@
 import { configureStore } from '@reduxjs/toolkit';
 import applicationEventReducer from './slice/application/applicationEventSlice';
 import authReducer from './slice/auth/authSlice';
+import bankListReducer from './slice/bank/bankListSlice';
 import counterReducer from './slice/counter/counterSlice';
 import eventListByStatusReducer from './slice/event/eventListByStatusSlice';
 import eventListReducer from './slice/event/eventListSlice';
 
 export const store = configureStore({
   reducer: {
+    applicationEvent: applicationEventReducer,
     auth: authReducer,
+    bankList: bankListReducer,
     counter: counterReducer,
     events: eventListReducer,
     eventsByStatus: eventListByStatusReducer,
-    applicationEvent: applicationEventReducer,
   },
 });
 

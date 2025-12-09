@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { StackScreenProps } from '@react-navigation/stack';
-import { View, Header, TextInput, Button, InputDropdown } from '@components';
+import {
+  View,
+  Header,
+  TextInput,
+  Button,
+  InputDropdown,
+  ModalLoading,
+} from '@components';
 import { shadowTypes } from '@constants';
 import { useInset } from '@hooks';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
@@ -13,7 +20,7 @@ type Props = StackScreenProps<WorkerStackParamList, 'WorkerEditBank'>;
 const WorkerEditBankScreen: React.FC<Props> = ({ navigation }) => {
   const { paddingBottom } = useInset();
   const dispatch = useAppDispatch();
-  const { data } = useAppSelector((state) => state.bankList);
+  const { data, isLoading } = useAppSelector((state) => state.bankList);
 
   const bankList = data.map((item) => ({
     key: item.bank_id,
@@ -45,6 +52,8 @@ const WorkerEditBankScreen: React.FC<Props> = ({ navigation }) => {
         paddingBottom={paddingBottom}>
         <Button label="Save Changes" onPress={() => navigation.goBack()} />
       </View>
+
+      <ModalLoading visible={isLoading} />
     </View>
   );
 };

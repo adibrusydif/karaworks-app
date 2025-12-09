@@ -5,6 +5,11 @@ export const Statuses = {
   APPLIED: 'applied',
 } as const;
 
+export const QRStatus = {
+  CLOCK_IN: 'clock_in',
+  CLOCK_OUT: 'clock_out',
+} as const;
+
 export const FormatDate = {
   FULL: 'DD MMM YYYY, HH:mm WIB',
 } as const;

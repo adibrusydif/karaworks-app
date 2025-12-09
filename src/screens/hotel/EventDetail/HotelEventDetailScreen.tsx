@@ -9,6 +9,11 @@ import {
   getApplicationsEvent,
   resetApplicationsEvent,
 } from '@store/slice/application/applicationEventSlice';
+import {
+  generateQRClockIn,
+  generateQRClockOut,
+  resetEventQR,
+} from '@store/slice/event/eventQRSlice';
 import { TabItem } from '@type/models/common';
 import { HotelStackParamList } from '@type/navigation';
 import EventInfo from './components/EventInfo';
@@ -25,20 +30,30 @@ const TAB_FILTER: TabItem[] = [
 const HotelEventDetailScreen: React.FC<Props> = ({ navigation, route }) => {
   const { paddingBottom } = useInset();
   const { event } = route.params;
+  const eventId = event.event_id;
 
   const dispatch = useAppDispatch();
   const { data, isLoading } = useAppSelector((state) => state.applicationEvent);
+  const {
+    data: dataQR,
+    isClockInLoading,
+    isClockOutLoading,
+  } = useAppSelector((state) => state.eventQR);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [titleQR, setTitleQR] = useState('QR Code Clock In');
+  // const [titleQR, setTitleQR] = useState('QR Code Clock In');
 
   const showButtonQR = event.event_status !== Statuses.POSTED;
   const showButton = event.event_status !== Statuses.POSTED;
   const isFinished = event.event_status === Statuses.FINISHED;
   const countUser = data.length;
+  const titleQR =
+    dataQR?.payload.type === 'clock_in'
+      ? 'QR Code Clock In'
+      : 'QR Code Clock Out';
 
   useEffect(() => {
-    dispatch(getApplicationsEvent(event.event_id));
+    dispatch(getApplicationsEvent(eventId));
 
     return () => {
       dispatch(resetApplicationsEvent());
@@ -46,13 +61,24 @@ const HotelEventDetailScreen: React.FC<Props> = ({ navigation, route }) => {
   }, []);
 
   const showQRClockIn = () => {
-    setTitleQR('QR Code Clock In');
-    setIsModalVisible(true);
+    dispatch(generateQRClockIn(eventId))
+      .unwrap()
+      .then(() => {
+        setIsModalVisible(true);
+      });
   };
 
   const showQRClockOut = () => {
-    setTitleQR('QR Code Clock Out');
-    setIsModalVisible(true);
+    dispatch(generateQRClockOut(eventId))
+      .unwrap()
+      .then(() => {
+        setIsModalVisible(true);
+      });
+  };
+
+  const closeModal = () => {
+    dispatch(resetEventQR());
+    setIsModalVisible(false);
   };
 
   return (
@@ -73,6 +99,8 @@ const HotelEventDetailScreen: React.FC<Props> = ({ navigation, route }) => {
                 buttonColor="SUCCESS_SURFACE"
                 style={styles.flex1}
                 elevation={false}
+                isLoading={isClockInLoading}
+                disabled={isClockInLoading || isClockOutLoading}
                 onPress={showQRClockIn}
               />
               <Button
@@ -82,6 +110,8 @@ const HotelEventDetailScreen: React.FC<Props> = ({ navigation, route }) => {
                 buttonColor="DANGER_SURFACE"
                 style={styles.flex1}
                 elevation={false}
+                isLoading={isClockOutLoading}
+                disabled={isClockInLoading || isClockOutLoading}
                 onPress={showQRClockOut}
               />
             </View>
@@ -122,7 +152,9 @@ const HotelEventDetailScreen: React.FC<Props> = ({ navigation, route }) => {
       <QRModal
         title={titleQR}
         visible={isModalVisible}
-        onClose={() => setIsModalVisible(false)}
+        type={dataQR.payload.type}
+        imageQR={dataQR.qr}
+        onClose={closeModal}
       />
     </View>
   );

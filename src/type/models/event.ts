@@ -1,3 +1,4 @@
+import { QRType } from './common';
 import { Hotel } from './hotel';
 
 export type EventStatus = 'posted' | 'ongoing' | 'finished';
@@ -30,4 +31,16 @@ export type EventCreator = {
   user_photo: string;
   bank_account_id: string;
   bank_account_name: string;
+};
+
+export type QR = {
+  payload: Payload;
+  qr: string;
+};
+
+export type Payload = {
+  event_id: string;
+  creator_id: string;
+  generated_at: string;
+  type: QRType;
 };

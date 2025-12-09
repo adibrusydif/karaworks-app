@@ -5,6 +5,7 @@ import bankListReducer from './slice/bank/bankListSlice';
 import counterReducer from './slice/counter/counterSlice';
 import eventListByStatusReducer from './slice/event/eventListByStatusSlice';
 import eventListReducer from './slice/event/eventListSlice';
+import eventQRReducer from './slice/event/eventQRSlice';
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     auth: authReducer,
     bankList: bankListReducer,
     counter: counterReducer,
+    eventQR: eventQRReducer,
     events: eventListReducer,
     eventsByStatus: eventListByStatusReducer,
   },

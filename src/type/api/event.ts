@@ -1,4 +1,4 @@
-import { Event } from '@type/models/event';
+import { Event, QR } from '@type/models/event';
 import { ApiResponse } from './common';
 
 export type EventListResponse = {
@@ -8,3 +8,5 @@ export type EventListResponse = {
 export type EventDetailResponse = {
   data: ApiResponse<Event>;
 };
+
+export type QRResponse = ApiResponse<QR>;

@@ -5,6 +5,7 @@ import {
   EditProfileScreen,
   WorkerEditBankScreen,
   WorkerEventDetailScreen,
+  WorkerQRScannerScreen,
   WorkerSuccessWithdrawScreen,
   WorkerWalletScreen,
   WorkerWithdrawScreen,
@@ -34,6 +35,7 @@ const WorkerNavigator = () => {
         name="WorkerSuccessWithdraw"
         component={WorkerSuccessWithdrawScreen}
       />
+      <Stack.Screen name="WorkerQRScanner" component={WorkerQRScannerScreen} />
     </Stack.Navigator>
   );
 };

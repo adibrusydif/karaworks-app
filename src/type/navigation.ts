@@ -46,6 +46,7 @@ export type WorkerStackParamList = {
   WorkerWallet: undefined;
   WorkerWithdraw: undefined;
   WorkerSuccessWithdraw: undefined;
+  WorkerQRScanner: undefined;
 };
 
 export type WorkerTabParamList = {

@@ -5,6 +5,7 @@ import {
   Platform,
   ToastAndroid,
 } from 'react-native';
+import { BarcodeScanningResult } from 'expo-camera';
 
 export const { width: deviceWidth, height: deviceHeight } =
   Dimensions.get('window');
@@ -36,4 +37,48 @@ export const showToastNative = (message: string) => {
       ToastAndroid.BOTTOM,
     );
   }
+};
+
+// Helper function to check if a barcode is inside the scanning window
+export const isInsideWindow = (result: BarcodeScanningResult) => {
+  const WINDOW_W = 250;
+  const WINDOW_H = 250;
+  const left = (deviceWidth - WINDOW_W) / 2;
+  const top = (deviceHeight - WINDOW_H) / 2;
+  const right = left + WINDOW_W;
+  const bottom = top + WINDOW_H;
+
+  const anyResult = result as unknown as {
+    bounds?: {
+      origin: { x: number; y: number };
+      size: { width: number; height: number };
+    };
+    cornerPoints?: Array<{ x: number; y: number }>;
+  };
+
+  let cx: number | undefined;
+  let cy: number | undefined;
+
+  if (anyResult.bounds?.origin && anyResult.bounds?.size) {
+    cx = anyResult.bounds.origin.x + anyResult.bounds.size.width / 2;
+    cy = anyResult.bounds.origin.y + anyResult.bounds.size.height / 2;
+  } else if (
+    Array.isArray(anyResult.cornerPoints) &&
+    anyResult.cornerPoints.length
+  ) {
+    const xs = anyResult.cornerPoints.map((p) => p.x);
+    const ys = anyResult.cornerPoints.map((p) => p.y);
+    const minX = Math.min(...xs);
+    const maxX = Math.max(...xs);
+    const minY = Math.min(...ys);
+    const maxY = Math.max(...ys);
+    cx = (minX + maxX) / 2;
+    cy = (minY + maxY) / 2;
+  }
+
+  if (cx == null || cy == null) {
+    return true;
+  }
+
+  return cx >= left && cx <= right && cy >= top && cy <= bottom;
 };

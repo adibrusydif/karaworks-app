@@ -44,3 +44,10 @@ export type Payload = {
   generated_at: string;
   type: QRType;
 };
+
+export type ScanResult = {
+  event_id: string;
+  creator_id: string;
+  generated_at: string;
+  type: QRType;
+};

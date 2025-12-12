@@ -1,6 +1,6 @@
 import React from 'react';
 import { ActivityIndicator, Modal, ModalProps } from 'react-native';
-import { View, Text } from '@components';
+import { Text, View } from '@components/atoms';
 import { Colors } from '@constants';
 import styles from './styles';
 

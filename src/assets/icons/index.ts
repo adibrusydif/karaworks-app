@@ -7,6 +7,7 @@ import IcCalendar from './ic_calendar.svg';
 import IcClock from './ic_clock.svg';
 import IcClockIn from './ic_clock_in.svg';
 import IcClockOut from './ic_clock_out.svg';
+import IcClose from './ic_close.svg';
 import IcEvent from './ic_event.svg';
 import IcExplore from './ic_explore.svg';
 import IcLogout from './ic_logout.svg';
@@ -27,6 +28,7 @@ export const Icons = {
   IcClock,
   IcClockIn,
   IcClockOut,
+  IcClose,
   IcEvent,
   IcExplore,
   IcLogout,

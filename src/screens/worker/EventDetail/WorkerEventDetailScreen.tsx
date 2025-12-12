@@ -107,7 +107,10 @@ const WorkerEventDetail: React.FC<Props> = ({ navigation, route }) => {
       <View
         style={[styles.footer, shadowTypes.shadow_3]}
         paddingBottom={paddingBottom}>
-        <Button label="Apply" />
+        <Button
+          label="Scan QR Clock In"
+          onPress={() => navigation.navigate('WorkerQRScanner')}
+        />
       </View>
     </View>
   );

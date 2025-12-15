@@ -18,6 +18,11 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderStyle: 'dashed',
   },
+  photoPreview: {
+    width: scale(100),
+    height: scale(100),
+    borderRadius: 8,
+  },
 });
 
 export default styles;

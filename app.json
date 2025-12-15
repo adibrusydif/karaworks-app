@@ -24,6 +24,7 @@
     },
     "plugins": [
       "expo-asset",
+      "expo-font",
       [
         "expo-splash-screen",
         {
@@ -31,13 +32,18 @@
           "image": "./assets/icon-karaworks.png"
         }
       ],
-      "expo-font",
       [
         "expo-camera",
         {
           "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera",
           "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone",
           "recordAudioAndroid": true
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos to let you create a new event."
         }
       ]
     ]

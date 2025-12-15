@@ -1,6 +1,7 @@
 import React from 'react';
 import { Pressable } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
+import { Image } from 'expo-image';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 import { Icons } from '@assets';
 import {
@@ -12,7 +13,7 @@ import {
   Text,
 } from '@components';
 import { Colors, shadowTypes } from '@constants';
-import { useInset } from '@hooks';
+import { useInset, useImagePicker } from '@hooks';
 import { HotelStackParamList } from '@type/navigation';
 import { scale } from '@utils';
 import styles from './styles';
@@ -21,6 +22,8 @@ type Props = StackScreenProps<HotelStackParamList, 'HotelCreateEvent'>;
 
 const HotelCreateEventScreen: React.FC<Props> = ({ navigation }) => {
   const { paddingBottom } = useInset();
+  const { uri: image, pickImage, clearImage } = useImagePicker();
+
   return (
     <View flex={1}>
       <Header label="Create Event" onBack={() => navigation.goBack()} />
@@ -31,19 +34,55 @@ const HotelCreateEventScreen: React.FC<Props> = ({ navigation }) => {
           <TextInput label="Event Name" placeholder="Enter event name" />
 
           {/* Add Photo */}
-          <Pressable>
+          <View>
             <View gap={8}>
               <Text type="body2Regular" color="NEUTRAL_70">
                 Event Photo
               </Text>
-              <View style={styles.photoContainer}>
-                <Icons.IcAdd stroke={Colors.PRIMARY_MAIN} />
-                <Text type="captionMedium" color="NEUTRAL_60">
-                  Add Photo
-                </Text>
+              <View row alignItems="center" gap={8}>
+                {image ? (
+                  <Image
+                    source={{ uri: image }}
+                    style={styles.photoPreview}
+                    contentFit="fill"
+                  />
+                ) : (
+                  <Pressable
+                    style={[styles.photoContainer]}
+                    onPress={() => pickImage()}>
+                    <Icons.IcAdd stroke={Colors.PRIMARY_MAIN} />
+                    <Text type="captionMedium" color="NEUTRAL_60">
+                      Add Photo
+                    </Text>
+                  </Pressable>
+                )}
+                {image && (
+                  <View gap={4}>
+                    <Button
+                      typeText="captionSMedium"
+                      label="Change Photo"
+                      labelColor="PRIMARY_MAIN"
+                      width={72}
+                      height={24}
+                      buttonColor="PRIMARY_SURFACE"
+                      onPress={() => pickImage()}
+                      elevation={false}
+                    />
+                    <Button
+                      label="Remove"
+                      typeText="captionSMedium"
+                      labelColor="DANGER_MAIN"
+                      width={72}
+                      height={24}
+                      buttonColor="DANGER_SURFACE"
+                      onPress={clearImage}
+                      elevation={false}
+                    />
+                  </View>
+                )}
               </View>
             </View>
-          </Pressable>
+          </View>
 
           <TextInputArea
             label="Description / Rules"

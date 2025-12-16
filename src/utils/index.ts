@@ -39,6 +39,21 @@ export const showToastNative = (message: string) => {
   }
 };
 
+export const sanitizeNumberInput = (raw: string) => raw.replace(/[^0-9]/g, '');
+
+export const formatThousands = (raw: string) => {
+  const digits = sanitizeNumberInput(raw);
+  if (!digits) {
+    return '';
+  }
+  return digits.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+};
+
+export const toNumber = (raw: string) => {
+  const digits = sanitizeNumberInput(raw);
+  return digits ? parseInt(digits, 10) : 0;
+};
+
 // Helper function to check if a barcode is inside the scanning window
 export const isInsideWindow = (result: BarcodeScanningResult) => {
   const WINDOW_W = 250;

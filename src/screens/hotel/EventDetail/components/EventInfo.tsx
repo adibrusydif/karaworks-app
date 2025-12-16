@@ -15,6 +15,7 @@ interface EventInfoProps {
 
 const EventInfo: React.FC<EventInfoProps> = ({ event }) => {
   const [isReadMore, setIsReadMore] = useState(false);
+  const hasDesc = Boolean(event?.event_description);
 
   return (
     <View gap={12}>
@@ -31,13 +32,15 @@ const EventInfo: React.FC<EventInfoProps> = ({ event }) => {
           <Text
             style={styles.descEvent}
             numberOfLines={!isReadMore ? 5 : undefined}>
-            {event.event_description}
+            {hasDesc ? event.event_description : '-'}
           </Text>
-          <Pressable onPress={() => setIsReadMore(!isReadMore)}>
-            <Text type="body2SemiBold">
-              {isReadMore ? 'Read Less' : 'Read More'}
-            </Text>
-          </Pressable>
+          {hasDesc && (
+            <Pressable onPress={() => setIsReadMore(!isReadMore)}>
+              <Text type="body2SemiBold">
+                {isReadMore ? 'Read Less' : 'Read More'}
+              </Text>
+            </Pressable>
+          )}
         </View>
       </View>
       <View row gap={12}>

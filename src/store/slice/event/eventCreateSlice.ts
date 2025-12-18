@@ -35,12 +35,9 @@ export const eventCreateSlice = createSlice({
       .addCase(createEvent.pending, (state) => {
         state.isLoading = true;
         state.isError = false;
-        state.error = null;
       })
       .addCase(createEvent.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isError = false;
-        state.error = null;
         state.data = action.payload.data;
       })
       .addCase(createEvent.rejected, (state, action) => {

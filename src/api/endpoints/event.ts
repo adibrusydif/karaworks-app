@@ -1,9 +1,11 @@
+import { FORM_HEADERS } from '@api/apiHelper';
 import api from '@api/client';
 import { API_URL } from '@constants/Endpoints';
 import {
   EventDetailResponse,
   EventListResponse,
   EventPayload,
+  EventPhotoResponse,
   QRResponse,
 } from '@type/api/event';
 import { EventStatus } from '@type/models/event';
@@ -20,4 +22,13 @@ export const EventApi = {
     api.post(`${API_URL.EVENTS}/${eventId}/generate-clock-in-qr`),
   generateQRClockOut: (eventId: string): Promise<QRResponse> =>
     api.post(`${API_URL.EVENTS}/${eventId}/generate-clock-out-qr`),
+  uploadEventPhoto: (
+    eventId: string,
+    formData: FormData,
+  ): Promise<EventPhotoResponse> =>
+    api.post(
+      `${API_URL.UPLOAD_EVENT}/${eventId}/photo`,
+      formData,
+      FORM_HEADERS,
+    ),
 };

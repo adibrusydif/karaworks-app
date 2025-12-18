@@ -51,3 +51,11 @@ export type ScanResult = {
   generated_at: string;
   type: QRType;
 };
+
+export type EventPhoto = {
+  data: {
+    event_id: string;
+    event_photo: string;
+  };
+  photoUrl: string;
+};

@@ -29,7 +29,7 @@ export const formatCurrency = (amount: number, withoutRp?: boolean) => {
 
 export const showToastNative = (message: string) => {
   if (Platform.OS === 'ios' || Platform.OS === 'windows') {
-    Alert.alert('Pet Owner', message);
+    Alert.alert('Karaworks', message);
   } else {
     ToastAndroid.showWithGravity(
       message,
@@ -96,4 +96,24 @@ export const isInsideWindow = (result: BarcodeScanningResult) => {
   }
 
   return cx >= left && cx <= right && cy >= top && cy <= bottom;
+};
+
+export const uriToFile = (uri: string, prefix?: string) => {
+  if (!uri) {
+    return { name: '', type: '', uri: '' };
+  }
+
+  let filename = uri.split('/').pop() || `file-${Date.now()}`;
+  if (prefix) {
+    filename = `${prefix}-${filename}`;
+  }
+  const match = /\.(\w+)$/.exec(filename);
+  const ext = match ? match[1].toLowerCase() : 'jpeg';
+  const type = `image/${ext === 'jpg' ? 'jpeg' : ext}`;
+
+  return {
+    name: filename,
+    type,
+    uri,
+  };
 };

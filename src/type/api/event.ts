@@ -1,4 +1,4 @@
-import { Event, QR } from '@type/models/event';
+import { Event, EventPhoto, QR } from '@type/models/event';
 import { ApiResponse } from './common';
 
 export type EventPayload = {
@@ -12,6 +12,11 @@ export type EventPayload = {
   event_status?: string;
 };
 
+export type EventPhotoPayload = {
+  eventId: string;
+  imageUri: string;
+};
+
 export type EventListResponse = {
   data: ApiResponse<Event[]>;
 };
@@ -21,3 +26,5 @@ export type EventDetailResponse = {
 };
 
 export type QRResponse = ApiResponse<QR>;
+
+export type EventPhotoResponse = ApiResponse<EventPhoto>;

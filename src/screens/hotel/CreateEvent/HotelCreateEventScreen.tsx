@@ -12,12 +12,14 @@ import {
   Button,
   TextInputArea,
   Text,
+  ModalLoading,
 } from '@components';
 import { Colors, shadowTypes } from '@constants';
 import { useInset, useImagePicker, useForm } from '@hooks';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { createEvent } from '@store/slice/event/eventCreateSlice';
-import { EventPayload } from '@type/api/event';
+import { uploadEventPhoto } from '@store/slice/event/eventPhotoSlice';
+import { EventPayload, EventPhotoPayload } from '@type/api/event';
 import { HotelStackParamList } from '@type/navigation';
 import { scale, formatThousands, toNumber } from '@utils';
 import { convertDate } from '@utils/dates';
@@ -31,6 +33,7 @@ const HotelCreateEventScreen: React.FC<Props> = ({ navigation }) => {
 
   const dispatch = useAppDispatch();
   const isLoading = useAppSelector((state) => state.eventCreate.isLoading);
+  const isLoadingPhoto = useAppSelector((state) => state.eventPhoto.isLoading);
 
   const [form, setForm] = useForm({
     name: '',
@@ -42,7 +45,7 @@ const HotelCreateEventScreen: React.FC<Props> = ({ navigation }) => {
 
   const [isDateVisible, setIsDateVisible] = useState(false);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const payload: EventPayload = {
       event_creator_id: 'af33511c-a5ab-4ecc-acdd-2de7079e6871', // TODO: get from auth
       event_name: form.name,
@@ -54,7 +57,13 @@ const HotelCreateEventScreen: React.FC<Props> = ({ navigation }) => {
 
     dispatch(createEvent(payload))
       .unwrap()
-      .then(() => {
+      .then(async (res) => {
+        const photoPayload: EventPhotoPayload = {
+          eventId: res.data.event_id,
+          imageUri: image || '',
+        };
+
+        await dispatch(uploadEventPhoto(photoPayload));
         navigation.replace('HotelSuccessCreateEvent');
       });
   };
@@ -168,7 +177,7 @@ const HotelCreateEventScreen: React.FC<Props> = ({ navigation }) => {
         paddingBottom={paddingBottom}>
         <Button
           label="Create Event"
-          disabled={isLoading}
+          disabled={isLoading || isLoadingPhoto}
           isLoading={isLoading}
           onPress={handleSubmit}
         />
@@ -180,6 +189,8 @@ const HotelCreateEventScreen: React.FC<Props> = ({ navigation }) => {
         onConfirm={handleSelectDate}
         onCancel={() => setIsDateVisible(false)}
       />
+
+      <ModalLoading visible={isLoadingPhoto} />
     </View>
   );
 };

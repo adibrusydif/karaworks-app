@@ -6,7 +6,7 @@ import axios, {
 } from 'axios';
 import { StorageKey } from '@constants';
 import { API_CORE } from '@constants/Endpoints';
-import { getDataStorage } from '@utils';
+import { getDataStorage } from '@utils/storage';
 
 const options: AxiosRequestConfig = {
   baseURL: API_CORE,

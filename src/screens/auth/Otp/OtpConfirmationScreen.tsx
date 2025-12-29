@@ -1,14 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, Pressable } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { Images } from '@assets';
-import { Button, Header, Text, TextInput, View } from '@components';
+import {
+  Button,
+  Header,
+  ModalLoading,
+  Text,
+  TextInput,
+  View,
+} from '@components';
 import { shadowTypes, StorageKey } from '@constants';
 import { useInset } from '@hooks';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { setAuth } from '@store/slice/auth/authSlice';
+import { requestOTP } from '@store/slice/auth/requestOTPSlice';
 import { verifyOTP } from '@store/slice/auth/verifyOTPSlice';
 import { AuthStackParamList } from '@type/navigation';
+import { formatTime } from '@utils';
 import { storeDataStorage } from '@utils/storage';
 import styles from './styles';
 
@@ -19,9 +28,31 @@ const OtpConfirmationScreen: React.FC<Props> = ({ navigation, route }) => {
   const { phone } = route.params;
 
   const dispatch = useAppDispatch();
-  const { isLoading } = useAppSelector((state) => state.verifyOTP);
+  const isLoading = useAppSelector((state) => state.verifyOTP.isLoading);
+  const isRequestLoading = useAppSelector(
+    (state) => state.requestOTP.isLoading,
+  );
 
   const [otp, setOtp] = useState('0000');
+  const [secondsLeft, setSecondsLeft] = useState(60);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setSecondsLeft((s) => (s > 0 ? s - 1 : 0));
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const handleResend = () => {
+    if (secondsLeft === 0 && !isRequestLoading) {
+      dispatch(requestOTP({ phone_number: phone }))
+        .unwrap()
+        .then(() => {
+          setSecondsLeft(60);
+        });
+    }
+  };
 
   const handleSubmit = () => {
     dispatch(verifyOTP({ phone_number: phone, otp_code: otp }))
@@ -70,9 +101,20 @@ const OtpConfirmationScreen: React.FC<Props> = ({ navigation, route }) => {
               <Text center type="body2Regular">
                 Didn’t receive the code?
               </Text>
-              <Text center type="buttonSemiBold" color="NEUTRAL_50">
-                01:00
-              </Text>
+              {secondsLeft > 0 ? (
+                <Text center type="buttonSemiBold" color="NEUTRAL_50">
+                  {formatTime(secondsLeft)}
+                </Text>
+              ) : (
+                <Pressable disabled={isRequestLoading} onPress={handleResend}>
+                  <Text
+                    center
+                    type="body2SemiBold"
+                    color={isRequestLoading ? 'NEUTRAL_50' : 'SUCCESS_MAIN'}>
+                    Resend OTP
+                  </Text>
+                </Pressable>
+              )}
             </View>
             <Pressable onPress={() => navigation.popTo('Login')}>
               <Text center type="body2SemiBold">
@@ -92,6 +134,8 @@ const OtpConfirmationScreen: React.FC<Props> = ({ navigation, route }) => {
           isLoading={isLoading}
         />
       </View>
+
+      <ModalLoading visible={isRequestLoading} />
     </View>
   );
 };

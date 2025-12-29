@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { StorageKey } from '@constants';
 import { User, UserRole } from '@type/models/user';
-import { getDataStorage, removeDataStorage } from '@utils';
+import { getDataStorage, removeDataStorage } from '@utils/storage';
 import { AppDispatch } from '../../store';
 import type { PayloadAction } from '@reduxjs/toolkit';
 

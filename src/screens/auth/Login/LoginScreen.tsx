@@ -4,17 +4,19 @@ import { StackScreenProps } from '@react-navigation/stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Images } from '@assets';
 import { Button, Text, TextInput, View } from '@components';
-import { setAuth } from '@store/slice/auth/authSlice';
-import { useAppDispatch } from '@storehooks';
+import { requestOTP } from '@store/slice/auth/requestOTPSlice';
+import { useAppDispatch, useAppSelector } from '@storehooks';
 import { AuthStackParamList } from '@type/navigation';
 import styles from './styles';
 
 type Props = StackScreenProps<AuthStackParamList, 'Login'>;
 
-const PREFIX = '+62';
+const PREFIX = '+';
 
 const LoginScreen: React.FC<Props> = ({ navigation }) => {
   const dispatch = useAppDispatch();
+  const isLoading = useAppSelector((state) => state.requestOTP.isLoading);
+
   const [phone, setPhone] = useState(PREFIX);
 
   const handleChangeText = (raw: string) => {
@@ -29,13 +31,19 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
       return;
     }
 
-    const withoutPrefix = trimmed.replace(/^\+?62/, '');
+    const withoutPrefix = trimmed.replace(/^\+?/, '');
     const digitsOnly = withoutPrefix.replace(/[^0-9]/g, '');
     setPhone(PREFIX + digitsOnly);
   };
 
-  const handleLogin = () => {
-    dispatch(setAuth({ token: 'token', role: 'hotel' }));
+  const handleLogin = async () => {
+    dispatch(requestOTP({ phone_number: phone }))
+      .unwrap()
+      .then((res) => {
+        if (res) {
+          navigation.navigate('OtpConfirmation', { phone });
+        }
+      });
   };
 
   return (
@@ -56,8 +64,14 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
             desc="format: +6281234567890"
             onChangeText={handleChangeText}
             keyboardType="phone-pad"
+            maxLength={15}
           />
-          <Button label="Sign In" onPress={handleLogin} />
+          <Button
+            label="Sign In"
+            disabled={phone.length < 8 || isLoading}
+            isLoading={isLoading}
+            onPress={handleLogin}
+          />
 
           <Pressable onPress={() => navigation.navigate('Signup')}>
             <Text center type="body1Regular" color="NEUTRAL_70">

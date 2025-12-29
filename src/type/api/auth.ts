@@ -1,14 +1,12 @@
+import { RequestOTP } from '@type/models/auth';
 import { ApiResponse } from './common';
-import { User } from '../models/user';
 
 // Request payloads
-export type LoginRequest = {
-  phone: string;
+export type RequestOTPPayload = {
+  phone_number: string;
 };
 
 // Response types
-export type LoginResponse = ApiResponse<{
-  user: User;
-  accessToken: string;
-  refreshToken: string;
+export type RequestOTPResponse = ApiResponse<{
+  data: RequestOTP;
 }>;

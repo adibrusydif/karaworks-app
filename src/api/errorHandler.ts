@@ -23,6 +23,7 @@ export const handleAxiosError = (
   const data = error.response?.data as any;
   let errMessage: string =
     (typeof data === 'string' ? data : data?.error?.message) ||
+    data?.error ||
     error.message ||
     customErrorMessage ||
     'An error occurred';

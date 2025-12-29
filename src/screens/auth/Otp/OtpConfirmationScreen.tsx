@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image } from 'react-native';
+import { Image, Pressable } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { Images } from '@assets';
 import { Button, Header, Text, TextInput, View } from '@components';
@@ -10,8 +10,9 @@ import styles from './styles';
 
 type Props = StackScreenProps<AuthStackParamList, 'OtpConfirmation'>;
 
-const OtpConfirmationScreen: React.FC<Props> = ({ navigation }) => {
+const OtpConfirmationScreen: React.FC<Props> = ({ navigation, route }) => {
   const { paddingBottom } = useInset();
+  const { phone } = route.params;
 
   return (
     <View style={styles.container}>
@@ -21,9 +22,17 @@ const OtpConfirmationScreen: React.FC<Props> = ({ navigation }) => {
         <View gap={32}>
           <Text center type="body2Regular">
             Enter the 4-digit code received on this mobile phone number{' '}
-            <Text type="body2SemiBold">+62 8451 9126</Text>
+            <Text type="body2SemiBold">{phone}</Text>
           </Text>
-          <TextInput placeholder="Enter OTP" />
+          <View alignSelf="center">
+            <TextInput
+              maxLength={4}
+              keyboardType="number-pad"
+              width={80}
+              textAlign="center"
+              textAlignVertical="center"
+            />
+          </View>
 
           <View gap={16}>
             <View gap={8}>
@@ -34,9 +43,11 @@ const OtpConfirmationScreen: React.FC<Props> = ({ navigation }) => {
                 01:00
               </Text>
             </View>
-            <Text center type="body2SemiBold">
-              Change Number
-            </Text>
+            <Pressable onPress={() => navigation.popTo('Login')}>
+              <Text center type="body2SemiBold">
+                Change Number
+              </Text>
+            </Pressable>
           </View>
         </View>
       </View>

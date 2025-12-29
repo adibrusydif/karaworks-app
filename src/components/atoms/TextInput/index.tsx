@@ -22,6 +22,7 @@ interface InputTextProps extends TextInputProps {
   onPress?: () => void;
   onTapIconRight?: () => void;
   disabled?: boolean;
+  width?: number;
 }
 
 type InputTextWithRefProps = InputTextProps & { ref?: React.Ref<TextInputRN> };
@@ -35,6 +36,7 @@ const TextInput = ({
   onPress,
   onTapIconRight,
   disabled,
+  width,
   ref,
   ...props
 }: InputTextWithRefProps) => {
@@ -60,21 +62,24 @@ const TextInput = ({
         style={[
           styles.container,
           { backgroundColor: disabled ? Colors.NEUTRAL_20 : Colors.WHITE },
+          { width },
         ]}
         disabled={disabled}
         onPress={onPress}>
         {prefix && <Text type="body2Regular">{prefix}</Text>}
         <TextInputRN
           ref={ref}
-          style={styles.inputContainer}
+          style={[styles.inputContainer, { width }]}
           secureTextEntry={isPassword}
           editable={!disabled}
           onPressIn={disabled ? undefined : onPress}
           {...props}
         />
-        <Pressable onPress={onTapIconRight}>
-          <View style={styles.iconContainer}>{renderIconRight()}</View>
-        </Pressable>
+        {iconRight && (
+          <Pressable onPress={onTapIconRight}>
+            <View style={styles.iconContainer}>{renderIconRight()}</View>
+          </Pressable>
+        )}
       </TouchableOpacity>
       {desc && (
         <Text type="captionSRegular" color="NEUTRAL_70">

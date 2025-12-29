@@ -4,7 +4,9 @@ import axios, {
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from 'axios';
+import { StorageKey } from '@constants';
 import { API_CORE } from '@constants/Endpoints';
+import { getDataStorage } from '@utils';
 
 const options: AxiosRequestConfig = {
   baseURL: API_CORE,
@@ -17,8 +19,13 @@ const options: AxiosRequestConfig = {
 
 const api = axios.create(options);
 
-const onRequest = (request: InternalAxiosRequestConfig<any>) => {
+const onRequest = async (request: InternalAxiosRequestConfig<any>) => {
   request.headers = request.headers ?? {};
+  const token = await getDataStorage<string>(StorageKey.TOKEN);
+
+  if (token) {
+    request.headers.Authorization = `Bearer ${token}`;
+  }
 
   return request;
 };

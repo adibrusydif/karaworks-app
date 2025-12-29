@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import applicationEventReducer from './slice/application/applicationEventSlice';
 import authReducer from './slice/auth/authSlice';
 import requestOTPReducer from './slice/auth/requestOTPSlice';
+import verifyOTPReducer from './slice/auth/verifyOTPSlice';
 import bankListReducer from './slice/bank/bankListSlice';
 import counterReducer from './slice/counter/counterSlice';
 import eventCreateReducer from './slice/event/eventCreateSlice';
@@ -22,6 +23,7 @@ export const store = configureStore({
     events: eventListReducer,
     eventsByStatus: eventListByStatusReducer,
     requestOTP: requestOTPReducer,
+    verifyOTP: verifyOTPReducer,
   },
 });
 

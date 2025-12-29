@@ -29,6 +29,7 @@ const WorkerExploreScreen: React.FC<Props> = ({ navigation }) => {
   const { paddingTop } = useInset();
   const dispatch = useAppDispatch();
   const { data, isLoading } = useAppSelector((state) => state.events);
+  const user = useAppSelector((state) => state.auth.user);
 
   useEffect(() => {
     dispatch(getEvents());
@@ -71,7 +72,10 @@ const WorkerExploreScreen: React.FC<Props> = ({ navigation }) => {
         backgroundColor={'transparent'}
         barStyle="dark-content"
       />
-      <HeaderHome name="Fikri Sulaiman" onPressNotification={() => {}} />
+      <HeaderHome
+        name={user?.user_name || '-'}
+        onPressNotification={() => {}}
+      />
 
       <View flex={1} gap={16}>
         <View style={styles.walletContainer}>

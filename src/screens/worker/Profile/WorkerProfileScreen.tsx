@@ -5,7 +5,7 @@ import { StackScreenProps } from '@react-navigation/stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Icons, Images } from '@assets';
 import { ActionItem, Button, ProfileUser, Text, View } from '@components';
-import { resetAuth } from '@store/slice/auth/authSlice';
+import { clearAuth } from '@store/slice/auth/authSlice';
 import { useAppDispatch } from '@storehooks';
 import { WorkerStackParamList, WorkerTabParamList } from '@type/navigation';
 import styles from './styles';
@@ -19,7 +19,7 @@ const WorkerProfileScreen: React.FC<Props> = ({ navigation }) => {
   const dispatch = useAppDispatch();
 
   const handleLogout = () => {
-    dispatch(resetAuth());
+    dispatch(clearAuth());
   };
 
   return (

@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Image, Pressable } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { Images } from '@assets';
 import { Button, Header, Text, TextInput, View } from '@components';
-import { shadowTypes } from '@constants';
+import { shadowTypes, StorageKey } from '@constants';
 import { useInset } from '@hooks';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { setAuth } from '@store/slice/auth/authSlice';
+import { verifyOTP } from '@store/slice/auth/verifyOTPSlice';
 import { AuthStackParamList } from '@type/navigation';
+import { storeDataStorage } from '@utils/storage';
 import styles from './styles';
 
 type Props = StackScreenProps<AuthStackParamList, 'OtpConfirmation'>;
@@ -13,6 +17,31 @@ type Props = StackScreenProps<AuthStackParamList, 'OtpConfirmation'>;
 const OtpConfirmationScreen: React.FC<Props> = ({ navigation, route }) => {
   const { paddingBottom } = useInset();
   const { phone } = route.params;
+
+  const dispatch = useAppDispatch();
+  const { isLoading } = useAppSelector((state) => state.verifyOTP);
+
+  const [otp, setOtp] = useState('0000');
+
+  const handleSubmit = () => {
+    dispatch(verifyOTP({ phone_number: phone, otp_code: otp }))
+      .unwrap()
+      .then((res) => {
+        // Save token and role to storage
+        storeDataStorage(StorageKey.TOKEN, res.access_token);
+        storeDataStorage(StorageKey.ROLE, res.user?.user_role || '');
+        storeDataStorage(StorageKey.USER, res.user);
+
+        // Set auth state
+        dispatch(
+          setAuth({
+            token: res.access_token,
+            role: res.user.user_role,
+            user: res.user,
+          }),
+        );
+      });
+  };
 
   return (
     <View style={styles.container}>
@@ -26,6 +55,8 @@ const OtpConfirmationScreen: React.FC<Props> = ({ navigation, route }) => {
           </Text>
           <View alignSelf="center">
             <TextInput
+              value={otp}
+              onChangeText={setOtp}
               maxLength={4}
               keyboardType="number-pad"
               width={80}
@@ -56,7 +87,9 @@ const OtpConfirmationScreen: React.FC<Props> = ({ navigation, route }) => {
         paddingBottom={paddingBottom}>
         <Button
           label="Submit"
-          onPress={() => navigation.navigate('SuccessOtp')}
+          onPress={handleSubmit}
+          disabled={isLoading || otp.length < 4}
+          isLoading={isLoading}
         />
       </View>
     </View>

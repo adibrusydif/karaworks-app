@@ -2,12 +2,12 @@ export type User = {
   id: string;
   name: string;
   email: string;
-  role: string;
+  role: UserRole;
   bank_id: string;
   user_id: string;
   hotel_id: null;
   user_name: string;
-  user_role: string;
+  user_role: UserRole;
   created_at: Date;
   updated_at: Date;
   user_phone: string;
@@ -15,3 +15,5 @@ export type User = {
   bank_account_id: string;
   bank_account_name: string;
 };
+
+export type UserRole = 'worker' | 'hotel' | null;

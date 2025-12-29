@@ -5,8 +5,8 @@ import { StackScreenProps } from '@react-navigation/stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Icons, Images } from '@assets';
 import { ActionItem, ProfileUser, Text, View } from '@components';
-import { resetAuth } from '@store/slice/auth/authSlice';
-import { useAppDispatch } from '@storehooks';
+import { useAppDispatch } from '@store/hooks';
+import { clearAuth } from '@store/slice/auth/authSlice';
 import { HotelStackParamList, HotelTabParamList } from '@type/navigation';
 import styles from './styles';
 
@@ -19,7 +19,7 @@ const HotelProfileScreen: React.FC<Props> = ({ navigation }) => {
   const dispatch = useAppDispatch();
 
   const handleLogout = () => {
-    dispatch(resetAuth());
+    dispatch(clearAuth());
   };
 
   return (

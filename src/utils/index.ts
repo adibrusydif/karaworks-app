@@ -117,3 +117,5 @@ export const uriToFile = (uri: string, prefix?: string) => {
     uri,
   };
 };
+
+export * from './storage';

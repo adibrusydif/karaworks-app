@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import applicationEventReducer from './slice/application/applicationEventSlice';
+import authMeReducer from './slice/auth/authMeSlice';
 import authReducer from './slice/auth/authSlice';
 import requestOTPReducer from './slice/auth/requestOTPSlice';
 import verifyOTPReducer from './slice/auth/verifyOTPSlice';
@@ -15,6 +16,7 @@ export const store = configureStore({
   reducer: {
     applicationEvent: applicationEventReducer,
     auth: authReducer,
+    authMe: authMeReducer,
     bankList: bankListReducer,
     counter: counterReducer,
     eventCreate: eventCreateReducer,

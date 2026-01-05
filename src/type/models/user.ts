@@ -1,19 +1,24 @@
+import { Hotel } from './hotel';
+
 export type User = {
   id: string;
   name: string;
   email: string;
   role: UserRole;
-  bank_id: string;
   user_id: string;
-  hotel_id: null;
-  user_name: string;
-  user_role: UserRole;
-  created_at: Date;
-  updated_at: Date;
   user_phone: string;
+  user_name: string;
   user_photo: string;
-  bank_account_id: string;
-  bank_account_name: string;
+  user_role: UserRole;
+  hotel_id: string;
+  bank_id: null;
+  bank_account_name: null;
+  bank_account_id: null;
+  created_at: string;
+  updated_at: string;
+  hotel: Hotel;
+  bank: null;
+  wallet_balance: number;
 };
 
 export type UserRole = 'worker' | 'hotel' | null;

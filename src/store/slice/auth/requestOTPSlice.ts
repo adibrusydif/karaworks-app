@@ -7,12 +7,12 @@ import { BaseStateProps } from '@type/models/state';
 
 export const requestOTP = createAsyncThunk(
   'auth/requst-otp',
-  async (payload: RequestOTPPayload, thunkAPI) => {
+  async (payload: RequestOTPPayload, { rejectWithValue }) => {
     try {
       const response = await AuthApi.requestOTP(payload);
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(handleAxiosError(error));
+      return rejectWithValue(handleAxiosError(error));
     }
   },
 );
@@ -38,7 +38,7 @@ export const requestOTPSlice = createSlice({
       })
       .addCase(requestOTP.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.data = action.payload.data;
+        state.data = action.payload;
       })
       .addCase(requestOTP.rejected, (state, action) => {
         state.isLoading = false;

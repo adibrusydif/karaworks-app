@@ -9,6 +9,7 @@ import { View, FloatingButton, HeaderHome } from '@components';
 import { Colors } from '@constants';
 import { useInset } from '@hooks';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { getAuthMe } from '@store/slice/auth/authMeSlice';
 import { getEventsByStatus } from '@store/slice/event/eventListByStatusSlice';
 import { HotelStackParamList, HotelTabParamList } from '@type/navigation';
 import { deviceWidth } from '@utils';
@@ -38,10 +39,12 @@ const HotelEventScreen: React.FC<Props> = ({ navigation }) => {
   const { data: finishedData, isLoading: finishedIsLoading } = useAppSelector(
     (state) => state.eventsByStatus.finished,
   );
+  const user = useAppSelector((state) => state.authMe.data);
 
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
+    dispatch(getAuthMe());
     dispatch(getEventsByStatus('posted'));
     dispatch(getEventsByStatus('ongoing'));
     dispatch(getEventsByStatus('finished'));
@@ -113,7 +116,7 @@ const HotelEventScreen: React.FC<Props> = ({ navigation }) => {
         backgroundColor={'transparent'}
         barStyle="dark-content"
       />
-      <HeaderHome name="Hotel Harris" />
+      <HeaderHome name={user?.hotel.hotel_name || '-'} />
 
       <TabView
         navigationState={{ index, routes }}

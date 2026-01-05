@@ -21,13 +21,18 @@ const WorkerEditBankScreen: React.FC<Props> = ({ navigation }) => {
   const { paddingBottom } = useInset();
   const dispatch = useAppDispatch();
   const { data, isLoading } = useAppSelector((state) => state.bankList);
+  const user = useAppSelector((state) => state.authMe.data);
 
   const bankList = data.map((item) => ({
     key: item.bank_id,
     label: item.bank_name,
   }));
 
-  const [bankValue, setBankValue] = useState('');
+  const [bankValue, setBankValue] = useState(user?.bank?.bank_id || '');
+  const [accNumber, setAccNumber] = useState(user?.bank_account_id || '');
+  const [accOwnerName, setAccOwnerName] = useState(
+    user?.bank_account_name || '',
+  );
 
   useEffect(() => {
     dispatch(getBankList());
@@ -44,8 +49,16 @@ const WorkerEditBankScreen: React.FC<Props> = ({ navigation }) => {
           value={bankValue}
           onSelect={setBankValue}
         />
-        <TextInput label="Account Number" />
-        <TextInput label="Account Owner Name" />
+        <TextInput
+          label="Account Number"
+          value={accNumber}
+          onChangeText={setAccNumber}
+        />
+        <TextInput
+          label="Account Owner Name"
+          value={accOwnerName}
+          onChangeText={setAccOwnerName}
+        />
       </View>
       <View
         style={[styles.footer, shadowTypes.shadow_3]}

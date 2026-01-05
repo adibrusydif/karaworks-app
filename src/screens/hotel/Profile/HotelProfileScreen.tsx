@@ -4,8 +4,8 @@ import { CompositeScreenProps } from '@react-navigation/native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Icons, Images } from '@assets';
-import { ActionItem, ProfileUser, Text, View } from '@components';
-import { useAppDispatch } from '@store/hooks';
+import { ActionItem, ModalLoading, ProfileUser, Text, View } from '@components';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { clearAuth } from '@store/slice/auth/authSlice';
 import { HotelStackParamList, HotelTabParamList } from '@type/navigation';
 import styles from './styles';
@@ -17,6 +17,7 @@ type Props = CompositeScreenProps<
 
 const HotelProfileScreen: React.FC<Props> = ({ navigation }) => {
   const dispatch = useAppDispatch();
+  const { data: user, isLoading } = useAppSelector((state) => state.authMe);
 
   const handleLogout = () => {
     dispatch(clearAuth());
@@ -30,15 +31,15 @@ const HotelProfileScreen: React.FC<Props> = ({ navigation }) => {
       <ProfileUser
         label="Hotel Profile"
         image={Images.dummyHotelProfile}
-        name="Hotel Name"
-        contact="Hotel Contact"
+        name={user?.hotel?.hotel_name || '-'}
+        contact={user?.hotel?.hotel_email || '-'}
       />
       <View height={1} backgroundColor="NEUTRAL_30" />
       <ProfileUser
         label="User Profile"
-        image={Images.dummyUserProfile}
-        name="User Name"
-        contact="User Contact"
+        image={{ uri: user?.user_photo }}
+        name={user?.user_name || '-'}
+        contact={user?.user_phone || '-'}
         onEdit={() => navigation.navigate('EditProfile')}
       />
       <View height={1} backgroundColor="NEUTRAL_30" />
@@ -56,6 +57,8 @@ const HotelProfileScreen: React.FC<Props> = ({ navigation }) => {
         onPress={handleLogout}
       />
       <View height={1} backgroundColor="NEUTRAL_30" />
+
+      <ModalLoading visible={isLoading} />
     </SafeAreaView>
   );
 };

@@ -3,10 +3,17 @@ import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { CompositeScreenProps } from '@react-navigation/native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Icons, Images } from '@assets';
-import { ActionItem, Button, ProfileUser, Text, View } from '@components';
+import { Icons } from '@assets';
+import {
+  ActionItem,
+  Button,
+  ModalLoading,
+  ProfileUser,
+  Text,
+  View,
+} from '@components';
 import { clearAuth } from '@store/slice/auth/authSlice';
-import { useAppDispatch } from '@storehooks';
+import { useAppDispatch, useAppSelector } from '@storehooks';
 import { WorkerStackParamList, WorkerTabParamList } from '@type/navigation';
 import styles from './styles';
 
@@ -17,6 +24,7 @@ type Props = CompositeScreenProps<
 
 const WorkerProfileScreen: React.FC<Props> = ({ navigation }) => {
   const dispatch = useAppDispatch();
+  const { data, isLoading } = useAppSelector((state) => state.authMe);
 
   const handleLogout = () => {
     dispatch(clearAuth());
@@ -28,9 +36,9 @@ const WorkerProfileScreen: React.FC<Props> = ({ navigation }) => {
         <Text type="subtitle1Medium">Profile</Text>
       </View>
       <ProfileUser
-        image={Images.dummyUserProfile}
-        name="Fikri Sulaiman"
-        contact="+6285271827213"
+        image={{ uri: data?.user_photo }}
+        name={data?.user_name || '-'}
+        contact={data?.user_phone || '-'}
         onEdit={() => navigation.navigate('EditProfile')}
       />
       <View height={1} backgroundColor="NEUTRAL_30" />
@@ -40,9 +48,9 @@ const WorkerProfileScreen: React.FC<Props> = ({ navigation }) => {
             Bank Account Info
           </Text>
           <View>
-            <Text type="body1SemiBold">BCA</Text>
-            <Text type="body1SemiBold">126471296</Text>
-            <Text type="body1SemiBold">Fikri Sulaiman</Text>
+            <Text type="body1SemiBold">{data?.bank?.bank_name || '-'}</Text>
+            <Text type="body1SemiBold">{data?.bank_account_id || '-'}</Text>
+            <Text type="body1SemiBold">{data?.bank_account_name || '-'}</Text>
           </View>
         </View>
         <Button
@@ -70,6 +78,8 @@ const WorkerProfileScreen: React.FC<Props> = ({ navigation }) => {
         onPress={handleLogout}
       />
       <View height={1} backgroundColor="NEUTRAL_30" />
+
+      <ModalLoading visible={isLoading} />
     </SafeAreaView>
   );
 };

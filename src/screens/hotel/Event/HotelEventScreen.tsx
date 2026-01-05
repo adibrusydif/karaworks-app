@@ -116,7 +116,7 @@ const HotelEventScreen: React.FC<Props> = ({ navigation }) => {
         backgroundColor={'transparent'}
         barStyle="dark-content"
       />
-      <HeaderHome name={user?.hotel.hotel_name || '-'} />
+      <HeaderHome name={user?.hotel?.hotel_name || '-'} />
 
       <TabView
         navigationState={{ index, routes }}

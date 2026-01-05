@@ -1,3 +1,4 @@
+import { Bank } from './bank';
 import { Hotel } from './hotel';
 
 export type User = {
@@ -17,7 +18,7 @@ export type User = {
   created_at: string;
   updated_at: string;
   hotel: Hotel;
-  bank: null;
+  bank: Bank;
   wallet_balance: number;
 };
 

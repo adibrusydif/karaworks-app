@@ -13,6 +13,7 @@ import { Icons, Images } from '@assets';
 import { View, Text, Button, EventCard, HeaderHome } from '@components';
 import { Colors } from '@constants';
 import { useInset } from '@hooks';
+import { getAuthMe } from '@store/slice/auth/authMeSlice';
 import { getEvents } from '@store/slice/event/eventListSlice';
 import { useAppDispatch, useAppSelector } from '@storehooks';
 import { Event } from '@type/models/event';
@@ -32,6 +33,7 @@ const WorkerExploreScreen: React.FC<Props> = ({ navigation }) => {
   const user = useAppSelector((state) => state.auth.user);
 
   useEffect(() => {
+    dispatch(getAuthMe());
     dispatch(getEvents());
   }, []);
 
